@@ -1,363 +1,544 @@
 <!doctype html>
 <html lang="uk">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Мафія Киль · Mafia Kiel</title>
-  <meta name="description" content="Класична мафія щоп’ятниці в Кілі. Анонси, реєстрація, правила, турніри, рейтинг, фото/відео." />
-  <meta name="theme-color" content="#07080b" />
-  <link rel="stylesheet" href="styles.css">
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Мафія Киль · Mafia Kiel</title>
+    <meta
+      name="description"
+      content="Класична мафія щоп’ятниці в Кілі. Анонси, реєстрація, правила, турніри, рейтинг, фото/відео."
+    />
+    <meta name="theme-color" content="#07080b" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
-  <div class="grain"></div>
+  <body>
+    <div class="grain"></div>
 
-  <div class="wrap">
-    <div class="topbar">
-      <a class="brand" href="#top" aria-label="Мафія Киль">
-        <div class="logo">K</div>
-        <div>
-          <h1>Мафія Киль · <span style="color:var(--gold2)">Mafia Kiel</span></h1>
-          <p>Класична мафія щоп’ятниці · Kiel</p>
+    <div class="wrap">
+      <div class="topbar">
+        <a class="brand" href="#top" aria-label="Мафія Киль">
+          <div class="logo">K</div>
+          <div>
+            <h1>
+              Мафія Киль · <span style="color: var(--gold2)">Mafia Kiel</span>
+            </h1>
+            <p>Класична мафія щоп’ятниці · Kiel</p>
+          </div>
+        </a>
+        <div class="pillrow">
+          <div class="pill">
+            <span class="dot"></span> Brahmsweg 17 · 24159 Kiel
+          </div>
+          <div class="pill">
+            <span class="dot red"></span> Telegram: @kieler_mafia
+          </div>
         </div>
-      </a>
-      <div class="pillrow">
-        <div class="pill"><span class="dot"></span> Brahmsweg 17 · 24159 Kiel</div>
-        <div class="pill"><span class="dot red"></span> Telegram: @kieler_mafia</div>
       </div>
-    </div>
 
-    <section class="hero" id="top">
-      <div class="laser"></div>
-      <div class="spark"></div>
+      <section class="hero" id="top">
+        <div class="laser"></div>
+        <div class="spark"></div>
 
-      <div class="heroGrid">
-        <div class="heroLeft">
-          <div class="kicker"><span class="mark"></span> Kieler Mafia Club</div>
-          <h2>MAFIA <span>FRIDAY</span> · KIEL</h2>
-          <p>
-            Ніколи не грав(ла) в мафію? Навчимо ✌️
-            Спочатку короткий майстер-клас, далі — ігри, інтриги та найкраща компанія.
+        <div class="heroGrid">
+          <div class="heroLeft">
+            <div class="kicker">
+              <span class="mark"></span> Kieler Mafia Club
+            </div>
+            <h2>MAFIA <span>FRIDAY</span> · KIEL</h2>
+            <p>
+              Ніколи не грав(ла) в мафію? Навчимо ✌️ Спочатку короткий
+              майстер-клас, далі — ігри, інтриги та найкраща компанія.
+            </p>
+
+            <div class="chips">
+              <span class="chip"
+                ><span class="c"></span> <b>17:30</b> майстер-клас</span
+              >
+              <span class="chip"
+                ><span class="c"></span> <b>18:30</b> ігри</span
+              >
+              <span class="chip"
+                ><span class="c red"></span> інколи: <b>Total Black</b></span
+              >
+            </div>
+
+            <div class="ctas">
+              <a class="btn primary" id="btnSignup" href="#"
+                ><span>🕵️</span> Записатися</a
+              >
+              <a
+                class="btn"
+                id="btnIG"
+                href="https://instagram.com/kieler.mafia.club"
+                target="_blank"
+                rel="noopener"
+                ><span>📸</span> Instagram</a
+              >
+              <a class="btn red" href="#announcements"
+                ><span>📅</span> Анонси</a
+              >
+              <a class="btn" href="#club"><span>🖤</span> Про клуб</a>
+              <a class="btn" href="#hub"><span>🏆</span> Рейтинг</a>
+              <a
+                class="btn"
+                href="https://t.me/kieler_mafia"
+                target="_blank"
+                rel="noopener"
+                ><span>📣</span> Telegram канал</a
+              >
+            </div>
+          </div>
+
+          <div class="heroRight">
+            <div class="phone" aria-label="Featured Instagram reel">
+              <div class="phoneTop">
+                <b>Featured</b>
+                <span id="heroTag">REEL</span>
+              </div>
+              <div class="phoneBody" id="heroEmbedWrap"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid section">
+        <div class="card" id="announcements">
+          <h3>Анонси найближчих ігор</h3>
+          <p class="sub">
+            Кнопка “Add to Calendar” додає подію. Запис — через Telegram/DM або
+            email (кнопка “Записатися”).
+          </p>
+          <div class="events" id="events"></div>
+        </div>
+
+        <div class="card">
+          <h3>До наступної гри</h3>
+          <div class="countwrap">
+            <div class="counttitle">
+              <span id="nextLabel">Наступна гра: —</span>
+              <span id="nextMeta">—</span>
+            </div>
+            <div class="count" aria-live="polite">
+              <div class="unit">
+                <div class="num" id="d">--</div>
+                <div class="lbl">днів</div>
+              </div>
+              <div class="unit">
+                <div class="num" id="h">--</div>
+                <div class="lbl">год</div>
+              </div>
+              <div class="unit">
+                <div class="num" id="m">--</div>
+                <div class="lbl">хв</div>
+              </div>
+              <div class="unit">
+                <div class="num" id="s">--</div>
+                <div class="lbl">сек</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height: 12px"></div>
+
+          <h3>Хто ти сьогодні? 🎭</h3>
+          <div class="rolebox">
+            <div class="role" id="role">Натисни “Випадкова роль”</div>
+            <p class="small">
+              Фановий генератор для атмосфери (не справжній розподіл ролей 😉).
+            </p>
+            <button class="btn mini" id="btnRole" type="button">
+              🎲 Випадкова роль
+            </button>
+          </div>
+
+          <div style="height: 14px"></div>
+
+          <h3>Алібі та цитата дня 🖤</h3>
+          <div class="rolebox">
+            <div class="role" id="alibiText">Натисни “Згенерувати алібі”</div>
+            <button class="btn mini" id="btnAlibi" type="button">
+              🧾 Згенерувати алібі
+            </button>
+
+            <div style="height: 14px"></div>
+
+            <div class="role" id="quoteText">Натисни “Цитата дня”</div>
+            <button class="btn mini" id="btnQuote" type="button">
+              🖤 Цитата дня
+            </button>
+
+            <p class="small" style="margin-top: 8px">
+              Можна юзати як “слово ведучого” перед стартом гри 😄
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="split section" id="club">
+        <div class="card">
+          <h3>Про клуб</h3>
+          <p class="sub">
+            Ми граємо в класичну мафію щоп’ятниці в Кілі. Новачкам — короткий
+            майстер-клас. Атмосфера “як на афіші”: теми, дрес-код, фото/відео та
+            турнірні вечори.
+          </p>
+          <div class="chips">
+            <span class="chip"
+              ><span class="c"></span> Локація: <b>Brahmsweg 17</b></span
+            >
+            <span class="chip"><span class="c"></span> Місто: <b>Kiel</b></span>
+            <span class="chip"
+              ><span class="c red"></span> Telegram: <b>@kieler_mafia</b></span
+            >
+          </div>
+
+          <div style="height: 10px"></div>
+
+          <p class="sub" style="margin: 0">
+            <b>Як записатися:</b> натисни “Записатися” або напиши в Telegram /
+            Instagram. У повідомленні вкажи:
+            <i>дата/тема, ім’я, скільки людей</i>.
           </p>
 
-          <div class="chips">
-            <span class="chip"><span class="c"></span> <b>17:30</b> майстер-клас</span>
-            <span class="chip"><span class="c"></span> <b>18:30</b> ігри</span>
-            <span class="chip"><span class="c red"></span> інколи: <b>Total Black</b></span>
-          </div>
+          <div style="height: 12px"></div>
 
           <div class="ctas">
-            <a class="btn primary" id="btnSignup" href="#"><span>🕵️</span> Записатися</a>
-            <a class="btn" id="btnIG" href="https://instagram.com/kieler.mafia.club" target="_blank" rel="noopener"><span>📸</span> Instagram</a>
-            <a class="btn red" href="#announcements"><span>📅</span> Анонси</a>
-            <a class="btn" href="#club"><span>🖤</span> Про клуб</a>
-            <a class="btn" href="#hub"><span>🏆</span> Рейтинг</a>
-            <a class="btn" href="https://t.me/kieler_mafia" target="_blank" rel="noopener"><span>📣</span> Telegram канал</a>
+            <a
+              class="btn mini"
+              href="https://t.me/kieler_mafia"
+              target="_blank"
+              rel="noopener"
+              >📣 Telegram канал</a
+            >
+            <a
+              class="btn mini"
+              href="https://t.me/ksenyashvets19"
+              target="_blank"
+              rel="noopener"
+              >💬 Telegram @ksenyashvets19</a
+            >
+            <a
+              class="btn mini"
+              href="https://t.me/OksanaKolivanova"
+              target="_blank"
+              rel="noopener"
+              >💬 Telegram @OksanaKolivanova</a
+            >
           </div>
         </div>
 
-        <div class="heroRight">
-          <div class="phone" aria-label="Featured Instagram reel">
-            <div class="phoneTop">
-              <b>Featured</b>
-              <span id="heroTag">REEL</span>
-            </div>
-            <div class="phoneBody" id="heroEmbedWrap"></div>
-          </div>
+        <div class="card" id="rules">
+          <h3>Правила / FAQ</h3>
+          <p class="sub">
+            Коротко про формат. Ведучий пояснить деталі на місці.
+          </p>
+          <ul
+            class="sub"
+            style="margin: 0; padding-left: 18px; line-height: 1.7"
+          >
+            <li><b>17:30</b> — міні-навчання для новачків</li>
+            <li><b>18:30</b> — ігри (ведучий керує процесом)</li>
+            <li><b>Дрес-код</b> інколи тематичний (наприклад Total Black)</li>
+            <li><b>Ввічливість</b> і повага — must</li>
+          </ul>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="grid section">
-      <div class="card" id="announcements">
-        <h3>Анонси найближчих ігор</h3>
-        <p class="sub">Кнопка “Add to Calendar” додає подію. Запис — через Telegram/DM або email (кнопка “Записатися”).</p>
-        <div class="events" id="events"></div>
-      </div>
-
-      <div class="card">
-        <h3>До наступної гри</h3>
-        <div class="countwrap">
-          <div class="counttitle">
-            <span id="nextLabel">Наступна гра: —</span>
-            <span id="nextMeta">—</span>
-          </div>
-          <div class="count" aria-live="polite">
-            <div class="unit"><div class="num" id="d">--</div><div class="lbl">днів</div></div>
-            <div class="unit"><div class="num" id="h">--</div><div class="lbl">год</div></div>
-            <div class="unit"><div class="num" id="m">--</div><div class="lbl">хв</div></div>
-            <div class="unit"><div class="num" id="s">--</div><div class="lbl">сек</div></div>
-          </div>
-        </div>
-
-        <div style="height:12px"></div>
-
-        <h3>Хто ти сьогодні? 🎭</h3>
-        <div class="rolebox">
-          <div class="role" id="role">Натисни “Випадкова роль”</div>
-          <p class="small">Фановий генератор для атмосфери (не справжній розподіл ролей 😉).</p>
-          <button class="btn mini" id="btnRole" type="button">🎲 Випадкова роль</button>
-        </div>
-
-        <div style="height:14px"></div>
-
-        <h3>Алібі та цитата дня 🖤</h3>
-        <div class="rolebox">
-          <div class="role" id="alibiText">Натисни “Згенерувати алібі”</div>
-          <button class="btn mini" id="btnAlibi" type="button">🧾 Згенерувати алібі</button>
-
-          <div style="height:14px"></div>
-
-          <div class="role" id="quoteText">Натисни “Цитата дня”</div>
-          <button class="btn mini" id="btnQuote" type="button">🖤 Цитата дня</button>
-
-          <p class="small" style="margin-top:8px">Можна юзати як “слово ведучого” перед стартом гри 😄</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="split section" id="club">
-      <div class="card">
-        <h3>Про клуб</h3>
+      <section class="card section" id="photos">
+        <h3>Фото / пости з Instagram</h3>
         <p class="sub">
-          Ми граємо в класичну мафію щоп’ятниці в Кілі. Новачкам — короткий майстер-клас.
-          Атмосфера “як на афіші”: теми, дрес-код, фото/відео та турнірні вечори.
+          Тут підтягуються пости як “плитки”. Якщо embed не показується —
+          натисни “Відкрити пост”.
         </p>
-        <div class="chips">
-          <span class="chip"><span class="c"></span> Локація: <b>Brahmsweg 17</b></span>
-          <span class="chip"><span class="c"></span> Місто: <b>Kiel</b></span>
-          <span class="chip"><span class="c red"></span> Telegram: <b>@kieler_mafia</b></span>
-        </div>
+        <div class="iggrid" id="iggrid"></div>
+      </section>
 
-        <div style="height:10px"></div>
-
-        <p class="sub" style="margin:0">
-          <b>Як записатися:</b> натисни “Записатися” або напиши в Telegram / Instagram.
-          У повідомленні вкажи: <i>дата/тема, ім’я, скільки людей</i>.
-        </p>
-
-        <div style="height:12px"></div>
-
-        <div class="ctas">
-          <a class="btn mini" href="https://t.me/kieler_mafia" target="_blank" rel="noopener">📣 Telegram канал</a>
-          <a class="btn mini" href="https://t.me/ksenyashvets19" target="_blank" rel="noopener">💬 Telegram @ksenyashvets19</a>
-          <a class="btn mini" href="https://t.me/OksanaKolivanova" target="_blank" rel="noopener">💬 Telegram @OksanaKolivanova</a>
-        </div>
-      </div>
-
-      <div class="card" id="rules">
-        <h3>Правила / FAQ</h3>
-        <p class="sub">Коротко про формат. Ведучий пояснить деталі на місці.</p>
-        <ul class="sub" style="margin:0; padding-left:18px; line-height:1.7">
-          <li><b>17:30</b> — міні-навчання для новачків</li>
-          <li><b>18:30</b> — ігри (ведучий керує процесом)</li>
-          <li><b>Дрес-код</b> інколи тематичний (наприклад Total Black)</li>
-          <li><b>Ввічливість</b> і повага — must</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="card section" id="photos">
-      <h3>Фото / пости з Instagram</h3>
-      <p class="sub">
-        Тут підтягуються пости як “плитки”. Якщо embed не показується — натисни “Відкрити пост”.
-      </p>
-      <div class="iggrid" id="iggrid"></div>
-    </section>
-
-    <section class="card section" id="hub">
-      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
-        <h3 style="margin:0">Клубний Hub</h3>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <a class="btn mini" href="#announcements">📅 Анонси</a>
-          <a class="btn mini" href="#media">🎬 Відео</a>
-        </div>
-      </div>
-
-      <div class="tabs" role="tablist" aria-label="Hub tabs">
-        <button class="tab" role="tab" aria-selected="true" data-tab="rank">Рейтинг</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="tours">Турніри</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="players">Гравці</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="bday">Дні народження</button>
-      </div>
-
-      <div class="panel active" id="rank" role="tabpanel">
-        <p class="sub">Рейтинг рахується автоматично по турнірах поточного року.</p>
-        <table id="rankTable"></table>
-      </div>
-
-      <div class="panel" id="tours" role="tabpanel">
-        <div id="tournaments"></div>
-      </div>
-
-      <div class="panel" id="players" role="tabpanel">
-        <p class="sub">Клікни на гравця — покажемо участь у турнірах цього року та призові.</p>
-        <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:12px">
-          <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10)">
-            <table id="playersTable"></table>
-          </div>
-          <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10)">
-            <h3 style="margin:0 0 8px;font-size:15px" id="pTitle">Обери гравця</h3>
-            <div class="sub" id="pBody">Покажемо турніри, місця та призові за поточний рік.</div>
+      <section class="card section" id="hub">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+          "
+        >
+          <h3 style="margin: 0">Клубний Hub</h3>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <a class="btn mini" href="#announcements">📅 Анонси</a>
+            <a class="btn mini" href="#media">🎬 Відео</a>
           </div>
         </div>
-      </div>
 
-      <div class="panel" id="bday" role="tabpanel">
-        <p class="sub">Найближчі дні народження — зверху.</p>
-        <table id="bdayTable"></table>
-      </div>
-    </section>
+        <div class="tabs" role="tablist" aria-label="Hub tabs">
+          <button class="tab" role="tab" aria-selected="true" data-tab="rank">
+            Рейтинг
+          </button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="tours">
+            Турніри
+          </button>
+          <button
+            class="tab"
+            role="tab"
+            aria-selected="false"
+            data-tab="players"
+          >
+            Гравці
+          </button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="bday">
+            Дні народження
+          </button>
+        </div>
 
-    <section class="card section" id="media">
-      <h3>Відео / медіа</h3>
-      <p class="sub">YouTube можна вбудувати, а Reels/пости — як Instagram embed.</p>
-      <div id="mediaList"></div>
-    </section>
+        <div class="panel active" id="rank" role="tabpanel">
+          <p class="sub">
+            Рейтинг рахується автоматично по турнірах поточного року.
+          </p>
+          <table id="rankTable"></table>
+        </div>
 
-    <footer>
-      <div>
-        Telegram канал: <a href="https://t.me/kieler_mafia" target="_blank" rel="noopener">@kieler_mafia</a>
-        <span class="sep">·</span>
-        Контакти: <a href="https://t.me/ksenyashvets19" target="_blank" rel="noopener">@ksenyashvets19</a>
-        <span class="sep">·</span>
-        <a href="https://t.me/OksanaKolivanova" target="_blank" rel="noopener">@OksanaKolivanova</a>
-        <span class="sep">·</span>
-        Instagram: <a href="https://instagram.com/kieler.mafia.club" target="_blank" rel="noopener">@kieler.mafia.club</a>
-      </div>
-      <div style="margin-top:6px">© <span id="year"></span> Mafia Kiel · made with 🖤</div>
-    </footer>
-  </div>
+        <div class="panel" id="tours" role="tabpanel">
+          <div id="tournaments"></div>
+        </div>
 
-  <script>
-    // =========================
-    // EDIT: контакти / запис
-    // =========================
-    const CLUB = {
-      instagram: "https://instagram.com/kieler.mafia.club",
-      email: "kieler.mafia.club@gmail.com",
-      location: "Brahmsweg 17, 24159 Kiel",
-      telegramChannel: "https://t.me/kieler_mafia",
-      telegramContacts: [
-        { handle: "@ksenyashvets19", link: "https://t.me/ksenyashvets19" },
-        { handle: "@OksanaKolivanova", link: "https://t.me/OksanaKolivanova" }
-      ]
-    };
+        <div class="panel" id="players" role="tabpanel">
+          <p class="sub">
+            Клікни на гравця — покажемо участь у турнірах цього року та призові.
+          </p>
+          <div
+            style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 12px"
+          >
+            <div
+              class="card"
+              style="box-shadow: none; border-color: rgba(255, 255, 255, 0.1)"
+            >
+              <table id="playersTable"></table>
+            </div>
+            <div
+              class="card"
+              style="box-shadow: none; border-color: rgba(255, 255, 255, 0.1)"
+            >
+              <h3 style="margin: 0 0 8px; font-size: 15px" id="pTitle">
+                Обери гравця
+              </h3>
+              <div class="sub" id="pBody">
+                Покажемо турніри, місця та призові за поточний рік.
+              </div>
+            </div>
+          </div>
+        </div>
 
-    // =========================
-    // EDIT: HERO featured
-    // =========================
-    const HERO_FEATURE = {
-      title: "Reel",
-      url: "https://www.instagram.com/reel/DPd1lejDEOf/"
-    };
+        <div class="panel" id="bday" role="tabpanel">
+          <p class="sub">Найближчі дні народження — зверху.</p>
+          <table id="bdayTable"></table>
+        </div>
+      </section>
 
-    // =========================
-    // EDIT: АНОНСИ
-    // =========================
-    const EVENTS = [
-      {
-        title: "MAFIA FRIDAY 13 · TOTAL BLACK DRESS CODE",
-        dateTime: "2026-03-13T18:30:00+01:00",
-        warmup: "17:30 · майстер-клас",
-        game: "18:30 · ігри",
-        price: "Перший вечір — безкоштовно",
-        place: CLUB.location,
-        dress: "Total Black",
-        tags: ["dresscode","special"],
-      },
-      {
-        title: "Friday Mafia Night",
-        dateTime: "2026-03-20T18:30:00+01:00",
-        warmup: "17:30 · для новачків",
-        game: "18:30 · ігри",
-        price: "Уточнюй у DM / Telegram",
-        place: CLUB.location,
-        dress: "Free style",
-        tags: ["regular"],
-      }
-    ];
+      <section class="card section" id="media">
+        <h3>Відео / медіа</h3>
+        <p class="sub">
+          YouTube можна вбудувати, а Reels/пости — як Instagram embed.
+        </p>
+        <div id="mediaList"></div>
+      </section>
 
-    // =========================
-    // EDIT: Instagram posts (плитки)
-    // =========================
-    const IG_POSTS = [
-      { title:"Репорт", url:"https://www.instagram.com/p/DUyP-TADaGV/" },
-      { title:"Reel",   url:"https://www.instagram.com/reel/DPd1lejDEOf/" }
-    ];
+      <footer>
+        <div>
+          Telegram канал:
+          <a href="https://t.me/kieler_mafia" target="_blank" rel="noopener"
+            >@kieler_mafia</a
+          >
+          <span class="sep">·</span>
+          Контакти:
+          <a href="https://t.me/ksenyashvets19" target="_blank" rel="noopener"
+            >@ksenyashvets19</a
+          >
+          <span class="sep">·</span>
+          <a href="https://t.me/OksanaKolivanova" target="_blank" rel="noopener"
+            >@OksanaKolivanova</a
+          >
+          <span class="sep">·</span>
+          Instagram:
+          <a
+            href="https://instagram.com/kieler.mafia.club"
+            target="_blank"
+            rel="noopener"
+            >@kieler.mafia.club</a
+          >
+        </div>
+        <div style="margin-top: 6px">
+          © <span id="year"></span> Mafia Kiel · made with 🖤
+        </div>
+      </footer>
+    </div>
 
-    // =========================
-    // EDIT: HUB data + media
-    // =========================
-    const DATA = {
-      tournaments: [
-        {
-          name:"Spring Tournament #1",
-          date:"2026-03-20",
-          link:"",
-          participants:[
-            {nick:"foxxy", place:1, prize:50},
-            {nick:"an.krsh", place:2, prize:30},
-            {nick:"yalemonchik", place:3, prize:20},
-          ]
-        }
-      ],
-      players: [
-        { nick:"foxxy", birthday:"2000-05-12" },
-        { nick:"an.krsh", birthday:"1998-10-02" },
-        { nick:"yalemonchik", birthday:"1997-02-14" },
-      ],
-      media: [
-        { type:"instagram", title:"Reel (клуб)", url:"https://www.instagram.com/reel/DPd1lejDEOf/" },
-        { type:"instagram", title:"Пост (репорт)", url:"https://www.instagram.com/p/DUyP-TADaGV/" },
-        { type:"youtube", title:"Best moments (приклад)", url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-      ]
-    };
-
-    // =========================
-    // Helpers
-    // =========================
-    const $ = (id)=>document.getElementById(id);
-
-    function fmtDateTime(iso){
-      const d = new Date(iso);
-      return d.toLocaleString(undefined,{weekday:"short", year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit"});
-    }
-    function fmtDate(ymd){
-      const d = new Date(ymd+"T12:00:00");
-      return d.toLocaleDateString(undefined,{year:"numeric", month:"short", day:"2-digit"});
-    }
-
-    function normalizeIG(url){
-      try{
-        const u = new URL(url);
-        const parts = u.pathname.split("/").filter(Boolean);
-        const types = ["p","reel","tv"];
-        for(const t of types){
-          const idx = parts.indexOf(t);
-          if(idx >= 0 && parts[idx+1]){
-            const code = parts[idx+1];
-            return { type:t, code, permalink:`https://www.instagram.com/${t}/${code}/` };
-          }
-        }
-      }catch(e){}
-      return { type:"", code:"", permalink:url };
-    }
-
-    function buildICS(ev){
-      const start = new Date(ev.dateTime);
-      const end = new Date(start.getTime() + 3*60*60*1000);
-      const pad = (n)=> String(n).padStart(2,"0");
-      const toICS = (d)=>{
-        const u = new Date(d.getTime() - d.getTimezoneOffset()*60000);
-        return `${u.getUTCFullYear()}${pad(u.getUTCMonth()+1)}${pad(u.getUTCDate())}T${pad(u.getUTCHours())}${pad(u.getUTCMinutes())}${pad(u.getUTCSeconds())}Z`;
+    <script>
+      // =========================
+      // EDIT: контакти / запис
+      // =========================
+      const CLUB = {
+        instagram: "https://instagram.com/kieler.mafia.club",
+        email: "kieler.mafia.club@gmail.com",
+        location: "Brahmsweg 17, 24159 Kiel",
+        telegramChannel: "https://t.me/kieler_mafia",
+        telegramContacts: [
+          { handle: "@ksenyashvets19", link: "https://t.me/ksenyashvets19" },
+          {
+            handle: "@OksanaKolivanova",
+            link: "https://t.me/OksanaKolivanova",
+          },
+        ],
       };
-      const uid = `mafia-kiel-${start.getTime()}@mafiakiel`;
-      const title = ev.title.replace(/[,;]/g," ");
-      const loc = (ev.place || "").replace(/[,;]/g," ");
-      const desc = [ev.warmup||"", ev.game||"", ev.price?`Ціна: ${ev.price}`:"", ev.dress?`Dress code: ${ev.dress}`:"", "Запис: Telegram/DM/Email"].filter(Boolean).join("\\n");
-      const ics =
-`BEGIN:VCALENDAR
+
+      // =========================
+      // EDIT: HERO featured
+      // =========================
+      const HERO_FEATURE = {
+        title: "Reel",
+        url: "https://www.instagram.com/reel/DPd1lejDEOf/",
+      };
+
+      // =========================
+      // EDIT: АНОНСИ
+      // =========================
+      const EVENTS = [
+        {
+          title: "MAFIA FRIDAY 13 · TOTAL BLACK DRESS CODE",
+          dateTime: "2026-03-13T18:30:00+01:00",
+          warmup: "17:30 · майстер-клас",
+          game: "18:30 · ігри",
+          price: "Перший вечір — безкоштовно",
+          place: CLUB.location,
+          dress: "Total Black",
+          tags: ["dresscode", "special"],
+        },
+        {
+          title: "Friday Mafia Night",
+          dateTime: "2026-03-20T18:30:00+01:00",
+          warmup: "17:30 · для новачків",
+          game: "18:30 · ігри",
+          price: "Уточнюй у DM / Telegram",
+          place: CLUB.location,
+          dress: "Free style",
+          tags: ["regular"],
+        },
+      ];
+
+      // =========================
+      // EDIT: Instagram posts (плитки)
+      // =========================
+      const IG_POSTS = [
+        { title: "Репорт", url: "https://www.instagram.com/p/DUyP-TADaGV/" },
+        { title: "Reel", url: "https://www.instagram.com/reel/DPd1lejDEOf/" },
+      ];
+
+      // =========================
+      // EDIT: HUB data + media
+      // =========================
+      const DATA = {
+        tournaments: [
+          {
+            name: "Spring Tournament #1",
+            date: "2026-03-20",
+            link: "",
+            participants: [
+              { nick: "foxxy", place: 1, prize: 50 },
+              { nick: "an.krsh", place: 2, prize: 30 },
+              { nick: "yalemonchik", place: 3, prize: 20 },
+            ],
+          },
+        ],
+        players: [
+          { nick: "foxxy", birthday: "2000-05-12" },
+          { nick: "an.krsh", birthday: "1998-10-02" },
+          { nick: "yalemonchik", birthday: "1997-02-14" },
+        ],
+        media: [
+          {
+            type: "instagram",
+            title: "Reel (клуб)",
+            url: "https://www.instagram.com/reel/DPd1lejDEOf/",
+          },
+          {
+            type: "instagram",
+            title: "Пост (репорт)",
+            url: "https://www.instagram.com/p/DUyP-TADaGV/",
+          },
+          {
+            type: "youtube",
+            title: "Best moments (приклад)",
+            url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          },
+        ],
+      };
+
+      // =========================
+      // Helpers
+      // =========================
+      const $ = (id) => document.getElementById(id);
+
+      function fmtDateTime(iso) {
+        const d = new Date(iso);
+        return d.toLocaleString(undefined, {
+          weekday: "short",
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+      function fmtDate(ymd) {
+        const d = new Date(ymd + "T12:00:00");
+        return d.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+        });
+      }
+
+      function normalizeIG(url) {
+        try {
+          const u = new URL(url);
+          const parts = u.pathname.split("/").filter(Boolean);
+          const types = ["p", "reel", "tv"];
+          for (const t of types) {
+            const idx = parts.indexOf(t);
+            if (idx >= 0 && parts[idx + 1]) {
+              const code = parts[idx + 1];
+              return {
+                type: t,
+                code,
+                permalink: `https://www.instagram.com/${t}/${code}/`,
+              };
+            }
+          }
+        } catch (e) {}
+        return { type: "", code: "", permalink: url };
+      }
+
+      function buildICS(ev) {
+        const start = new Date(ev.dateTime);
+        const end = new Date(start.getTime() + 3 * 60 * 60 * 1000);
+        const pad = (n) => String(n).padStart(2, "0");
+        const toICS = (d) => {
+          const u = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+          return `${u.getUTCFullYear()}${pad(u.getUTCMonth() + 1)}${pad(u.getUTCDate())}T${pad(u.getUTCHours())}${pad(u.getUTCMinutes())}${pad(u.getUTCSeconds())}Z`;
+        };
+        const uid = `mafia-kiel-${start.getTime()}@mafiakiel`;
+        const title = ev.title.replace(/[,;]/g, " ");
+        const loc = (ev.place || "").replace(/[,;]/g, " ");
+        const desc = [
+          ev.warmup || "",
+          ev.game || "",
+          ev.price ? `Ціна: ${ev.price}` : "",
+          ev.dress ? `Dress code: ${ev.dress}` : "",
+          "Запис: Telegram/DM/Email",
+        ]
+          .filter(Boolean)
+          .join("\\n");
+        const ics = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Mafia Kiel//Events//UA
 CALSCALE:GREGORIAN
@@ -372,17 +553,21 @@ LOCATION:${loc}
 DESCRIPTION:${desc}
 END:VEVENT
 END:VCALENDAR`;
-      return "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
-    }
+        return "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+      }
 
-    // =========================
-    // Hero embed (official IG)
-    // =========================
-    (function renderHeroEmbed(){
-      const n = normalizeIG(HERO_FEATURE.url);
-      $("heroTag").textContent = (n.type || HERO_FEATURE.title || "IG").toUpperCase();
-      const wrap = $("heroEmbedWrap");
-      wrap.innerHTML = `
+      // =========================
+      // Hero embed (official IG)
+      // =========================
+      (function renderHeroEmbed() {
+        const n = normalizeIG(HERO_FEATURE.url);
+        $("heroTag").textContent = (
+          n.type ||
+          HERO_FEATURE.title ||
+          "IG"
+        ).toUpperCase();
+        const wrap = $("heroEmbedWrap");
+        wrap.innerHTML = `
         <blockquote class="instagram-media"
           data-instgrm-permalink="${n.permalink}"
           data-instgrm-version="14"
@@ -391,22 +576,26 @@ END:VCALENDAR`;
         <div style="height:10px"></div>
         <a class="btn mini" href="${n.permalink}" target="_blank" rel="noopener">Відкрити ↗</a>
       `;
-    })();
+      })();
 
-    // =========================
-    // Signup (Telegram-first)
-    // =========================
-    function signup(){
-      const subject = encodeURIComponent("Запис на мафію · Mafia Kiel");
-      const body = encodeURIComponent(
-        "Привіт! Хочу записатися на мафію.\n" +
-        "Дата/тема: ____\nІм’я: ____\nСкільки людей: ____\n\n" +
-        "Локація: " + CLUB.location + "\nInstagram: " + CLUB.instagram + "\nTelegram: " + CLUB.telegramChannel
-      );
-      const mailto = `mailto:${CLUB.email}?subject=${subject}&body=${body}`;
+      // =========================
+      // Signup (Telegram-first)
+      // =========================
+      function signup() {
+        const subject = encodeURIComponent("Запис на мафію · Mafia Kiel");
+        const body = encodeURIComponent(
+          "Привіт! Хочу записатися на мафію.\n" +
+            "Дата/тема: ____\nІм’я: ____\nСкільки людей: ____\n\n" +
+            "Локація: " +
+            CLUB.location +
+            "\nInstagram: " +
+            CLUB.instagram +
+            "\nTelegram: " +
+            CLUB.telegramChannel,
+        );
+        const mailto = `mailto:${CLUB.email}?subject=${subject}&body=${body}`;
 
-      const msg =
-`Як записатися?
+        const msg = `Як записатися?
 1) Telegram канал (анонси): ${CLUB.telegramChannel}
 2) Telegram контакти:
 - ${CLUB.telegramContacts[0].handle}
@@ -415,28 +604,38 @@ END:VCALENDAR`;
 4) Email: ${CLUB.email}
 
 Натисни OK — відкрию Email (як запасний варіант).`;
-      if(confirm(msg)) window.location.href = mailto;
-    }
-    $("btnSignup").addEventListener("click",(e)=>{e.preventDefault(); signup();});
+        if (confirm(msg)) window.location.href = mailto;
+      }
+      $("btnSignup").addEventListener("click", (e) => {
+        e.preventDefault();
+        signup();
+      });
 
-    // =========================
-    // Render events + countdown
-    // =========================
-    const $events = $("events");
+      // =========================
+      // Render events + countdown
+      // =========================
+      const $events = $("events");
 
-    function renderEvents(){
-      $events.innerHTML = "";
-      const sorted = [...EVENTS].sort((a,b)=> new Date(a.dateTime)-new Date(b.dateTime));
-      sorted.forEach(ev=>{
-        const badge = ev.tags?.includes("dresscode") ? `<span class="badge red">DRESS CODE</span>` : `<span class="badge">FRIDAY</span>`;
-        const dress = ev.dress && ev.dress.toLowerCase().includes("black")
-          ? `<span class="badge red">TOTAL BLACK</span>`
-          : (ev.dress ? `<span class="badge">${ev.dress}</span>` : "");
-        const icsHref = buildICS(ev);
+      function renderEvents() {
+        $events.innerHTML = "";
+        const sorted = [...EVENTS].sort(
+          (a, b) => new Date(a.dateTime) - new Date(b.dateTime),
+        );
+        sorted.forEach((ev) => {
+          const badge = ev.tags?.includes("dresscode")
+            ? `<span class="badge red">DRESS CODE</span>`
+            : `<span class="badge">FRIDAY</span>`;
+          const dress =
+            ev.dress && ev.dress.toLowerCase().includes("black")
+              ? `<span class="badge red">TOTAL BLACK</span>`
+              : ev.dress
+                ? `<span class="badge">${ev.dress}</span>`
+                : "";
+          const icsHref = buildICS(ev);
 
-        const el = document.createElement("div");
-        el.className = "event";
-        el.innerHTML = `
+          const el = document.createElement("div");
+          el.className = "event";
+          el.innerHTML = `
           <div>
             <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center">${badge} ${dress}</div>
             <div style="margin-top:8px">
@@ -454,105 +653,116 @@ END:VCALENDAR`;
             <a class="btn mini" href="${icsHref}" download="mafia-kiel.ics">➕ Add to Calendar</a>
           </div>
         `;
-        $events.appendChild(el);
+          $events.appendChild(el);
+        });
+        setNext(sorted);
+      }
+
+      function setNext(sorted) {
+        const now = new Date();
+        const next =
+          sorted.find((ev) => new Date(ev.dateTime) > now) || sorted[0];
+        window.__NEXT = next;
+        $("nextLabel").textContent = next
+          ? `Наступна гра: ${next.title}`
+          : "Наступна гра: —";
+        $("nextMeta").textContent = next ? fmtDateTime(next.dateTime) : "—";
+      }
+
+      function tick() {
+        const next = window.__NEXT;
+        if (!next) return;
+        const now = new Date().getTime();
+        const target = new Date(next.dateTime).getTime();
+        let diff = Math.max(0, target - now);
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= d * (1000 * 60 * 60 * 24);
+        const h = Math.floor(diff / (1000 * 60 * 60));
+        diff -= h * (1000 * 60 * 60);
+        const m = Math.floor(diff / (1000 * 60));
+        diff -= m * (1000 * 60);
+        const s = Math.floor(diff / 1000);
+
+        $("d").textContent = String(d).padStart(2, "0");
+        $("h").textContent = String(h).padStart(2, "0");
+        $("m").textContent = String(m).padStart(2, "0");
+        $("s").textContent = String(s).padStart(2, "0");
+      }
+
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-signup]");
+        if (btn) {
+          e.preventDefault();
+          signup();
+        }
       });
-      setNext(sorted);
-    }
 
-    function setNext(sorted){
-      const now = new Date();
-      const next = sorted.find(ev => new Date(ev.dateTime) > now) || sorted[0];
-      window.__NEXT = next;
-      $("nextLabel").textContent = next ? `Наступна гра: ${next.title}` : "Наступна гра: —";
-      $("nextMeta").textContent  = next ? fmtDateTime(next.dateTime) : "—";
-    }
+      // =========================
+      // Role randomizer
+      // =========================
+      const ROLES = [
+        { name: "Мирний мешканець", hint: "Спостерігай, аналізуй, голосуй." },
+        { name: "Мафія", hint: "Тримай лінію, не пались 😄" },
+        { name: "Шериф", hint: "Став питання і шукай правду." },
+        { name: "Дон", hint: "Керуєш грою — але тихо." },
+        { name: "Доктор", hint: "Рятуй місто (якщо роль у форматі)." },
+      ];
+      $("btnRole").addEventListener("click", () => {
+        const r = ROLES[Math.floor(Math.random() * ROLES.length)];
+        $("role").textContent = `${r.name} — ${r.hint}`;
+      });
 
-    function tick(){
-      const next = window.__NEXT;
-      if(!next) return;
-      const now = new Date().getTime();
-      const target = new Date(next.dateTime).getTime();
-      let diff = Math.max(0, target - now);
+      // =========================
+      // Alibi + Quote
+      // =========================
+      const ALIBIS = [
+        "Я просто прийшов(ла) за кавою… і випадково опинився(лась) тут ☕",
+        "Я мовчав(ла), бо аналізував(ла), а не тому що я мафія.",
+        "Мене підставили. Я занадто красивий(а), щоб бути мафією 😎",
+        "Я голосував(ла) логічно. Якщо це злочин — арештовуйте.",
+        "Я просто спостерігав(ла). Місто потребує мізків, не криків.",
+        "Я не підозрілий(а). Я просто інтроверт(ка) 🫠",
+        "Я не зливав(ла) нікого. Я рятував(ла) місто… по-своєму.",
+        "Я дивився(лась) на реакції. І зараз бачу, хто грає роль.",
+        "У мене алібі залізне: я навіть правил не дочекався(лась) — вже зрозумів(ла) хто мафія.",
+        "Я був(ла) мафією тільки в душі. На столі — ні 😇",
+      ];
 
-      const d = Math.floor(diff / (1000*60*60*24)); diff -= d*(1000*60*60*24);
-      const h = Math.floor(diff / (1000*60*60)); diff -= h*(1000*60*60);
-      const m = Math.floor(diff / (1000*60)); diff -= m*(1000*60);
-      const s = Math.floor(diff / 1000);
+      const QUOTES = [
+        "Місто засинає… але правда не спить.",
+        "Тиша — найкращий костюм мафії.",
+        "Не той винен, хто підозрілий. А той, хто надто переконливий.",
+        "Слова — це дим. Факти — це вогонь.",
+        "Якщо ти всім подобаєшся — ти або геній, або мафія.",
+        "Сьогодні ми граємо в мафію. Завтра — вона грає нами.",
+        "Довіра — валюта. Брехня — відсотки.",
+        "Поганий хід — теж хід. Гірше — не зробити жодного.",
+        "Перемога любить спокій. Мафія — хаос.",
+        "Завжди слухай місто. Особливо коли воно мовчить.",
+      ];
 
-      $("d").textContent = String(d).padStart(2,"0");
-      $("h").textContent = String(h).padStart(2,"0");
-      $("m").textContent = String(m).padStart(2,"0");
-      $("s").textContent = String(s).padStart(2,"0");
-    }
+      function pick(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
 
-    document.addEventListener("click",(e)=>{
-      const btn = e.target.closest("[data-signup]");
-      if(btn){ e.preventDefault(); signup(); }
-    });
+      $("btnAlibi").addEventListener("click", () => {
+        $("alibiText").textContent = pick(ALIBIS);
+      });
 
-    // =========================
-    // Role randomizer
-    // =========================
-    const ROLES = [
-      {name:"Мирний мешканець", hint:"Спостерігай, аналізуй, голосуй."},
-      {name:"Мафія", hint:"Тримай лінію, не пались 😄"},
-      {name:"Шериф", hint:"Став питання і шукай правду."},
-      {name:"Дон", hint:"Керуєш грою — але тихо."},
-      {name:"Доктор", hint:"Рятуй місто (якщо роль у форматі)."},
-    ];
-    $("btnRole").addEventListener("click", ()=>{
-      const r = ROLES[Math.floor(Math.random()*ROLES.length)];
-      $("role").textContent = `${r.name} — ${r.hint}`;
-    });
+      $("btnQuote").addEventListener("click", () => {
+        $("quoteText").textContent = "“" + pick(QUOTES) + "”";
+      });
 
-    // =========================
-    // Alibi + Quote
-    // =========================
-    const ALIBIS = [
-      "Я просто прийшов(ла) за кавою… і випадково опинився(лась) тут ☕",
-      "Я мовчав(ла), бо аналізував(ла), а не тому що я мафія.",
-      "Мене підставили. Я занадто красивий(а), щоб бути мафією 😎",
-      "Я голосував(ла) логічно. Якщо це злочин — арештовуйте.",
-      "Я просто спостерігав(ла). Місто потребує мізків, не криків.",
-      "Я не підозрілий(а). Я просто інтроверт(ка) 🫠",
-      "Я не зливав(ла) нікого. Я рятував(ла) місто… по-своєму.",
-      "Я дивився(лась) на реакції. І зараз бачу, хто грає роль.",
-      "У мене алібі залізне: я навіть правил не дочекався(лась) — вже зрозумів(ла) хто мафія.",
-      "Я був(ла) мафією тільки в душі. На столі — ні 😇"
-    ];
-
-    const QUOTES = [
-      "Місто засинає… але правда не спить.",
-      "Тиша — найкращий костюм мафії.",
-      "Не той винен, хто підозрілий. А той, хто надто переконливий.",
-      "Слова — це дим. Факти — це вогонь.",
-      "Якщо ти всім подобаєшся — ти або геній, або мафія.",
-      "Сьогодні ми граємо в мафію. Завтра — вона грає нами.",
-      "Довіра — валюта. Брехня — відсотки.",
-      "Поганий хід — теж хід. Гірше — не зробити жодного.",
-      "Перемога любить спокій. Мафія — хаос.",
-      "Завжди слухай місто. Особливо коли воно мовчить."
-    ];
-
-    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-
-    $("btnAlibi").addEventListener("click", ()=>{
-      $("alibiText").textContent = pick(ALIBIS);
-    });
-
-    $("btnQuote").addEventListener("click", ()=>{
-      $("quoteText").textContent = "“" + pick(QUOTES) + "”";
-    });
-
-    // =========================
-    // Instagram tiles (blockquote embeds)
-    // =========================
-    const grid = $("iggrid");
-    grid.innerHTML = IG_POSTS.map((p,i)=>{
-      const n = normalizeIG(p.url);
-      const title = p.title || "Instagram";
-      const label = n.code ? `#${n.code}` : `Post ${i+1}`;
-      return `
+      // =========================
+      // Instagram tiles (blockquote embeds)
+      // =========================
+      const grid = $("iggrid");
+      grid.innerHTML = IG_POSTS.map((p, i) => {
+        const n = normalizeIG(p.url);
+        const title = p.title || "Instagram";
+        const label = n.code ? `#${n.code}` : `Post ${i + 1}`;
+        return `
         <div class="igcard">
           <div class="top">
             <b>${title}</b>
@@ -569,60 +779,89 @@ END:VCALENDAR`;
           </div>
         </div>
       `;
-    }).join("");
+      }).join("");
 
-    // =========================
-    // Hub tabs
-    // =========================
-    const tabs = Array.from(document.querySelectorAll(".tab"));
-    const panels = Array.from(document.querySelectorAll(".panel"));
-    tabs.forEach(t=>{
-      t.addEventListener("click", ()=>{
-        tabs.forEach(x=>x.setAttribute("aria-selected","false"));
-        t.setAttribute("aria-selected","true");
-        const id = t.dataset.tab;
-        panels.forEach(p=>p.classList.toggle("active", p.id===id));
-      });
-    });
-
-    // =========================
-    // Ranking from tournaments current year
-    // =========================
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const scoreByPlace = (p)=> p===1?10 : p===2?7 : p===3?5 : 2;
-    const stats = new Map();
-    function addStat(nick, updater){
-      if(!stats.has(nick)) stats.set(nick, {nick, points:0, wins:0, prize:0, played:0, tours:[]});
-      updater(stats.get(nick));
-    }
-    DATA.tournaments.forEach(t=>{
-      const year = new Date(t.date+"T12:00:00").getFullYear();
-      if(year !== currentYear) return;
-      (t.participants||[]).forEach(p=>{
-        addStat(p.nick, s=>{
-          s.played += 1;
-          s.points += scoreByPlace(p.place);
-          s.prize += Number(p.prize||0);
-          if(p.place===1) s.wins += 1;
-          s.tours.push({tournament:t.name, date:t.date, place:p.place, prize:p.prize||0});
+      // =========================
+      // Hub tabs
+      // =========================
+      const tabs = Array.from(document.querySelectorAll(".tab"));
+      const panels = Array.from(document.querySelectorAll(".panel"));
+      tabs.forEach((t) => {
+        t.addEventListener("click", () => {
+          tabs.forEach((x) => x.setAttribute("aria-selected", "false"));
+          t.setAttribute("aria-selected", "true");
+          const id = t.dataset.tab;
+          panels.forEach((p) => p.classList.toggle("active", p.id === id));
         });
       });
-    });
-    const rankArr = Array.from(stats.values()).sort((a,b)=> (b.points-a.points) || (b.prize-a.prize) || (b.wins-a.wins));
-    $("rankTable").innerHTML = `
+
+      // =========================
+      // Ranking from tournaments current year
+      // =========================
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const scoreByPlace = (p) =>
+        p === 1 ? 10 : p === 2 ? 7 : p === 3 ? 5 : 2;
+      const stats = new Map();
+      function addStat(nick, updater) {
+        if (!stats.has(nick))
+          stats.set(nick, {
+            nick,
+            points: 0,
+            wins: 0,
+            prize: 0,
+            played: 0,
+            tours: [],
+          });
+        updater(stats.get(nick));
+      }
+      DATA.tournaments.forEach((t) => {
+        const year = new Date(t.date + "T12:00:00").getFullYear();
+        if (year !== currentYear) return;
+        (t.participants || []).forEach((p) => {
+          addStat(p.nick, (s) => {
+            s.played += 1;
+            s.points += scoreByPlace(p.place);
+            s.prize += Number(p.prize || 0);
+            if (p.place === 1) s.wins += 1;
+            s.tours.push({
+              tournament: t.name,
+              date: t.date,
+              place: p.place,
+              prize: p.prize || 0,
+            });
+          });
+        });
+      });
+      const rankArr = Array.from(stats.values()).sort(
+        (a, b) => b.points - a.points || b.prize - a.prize || b.wins - a.wins,
+      );
+      $("rankTable").innerHTML = `
       <thead><tr><th>#</th><th>Нік</th><th>Очки</th><th>Перемоги</th><th>Турнірів</th><th>Призові</th></tr></thead>
       <tbody>
-        ${rankArr.length? rankArr.map((r,i)=>`
-          <tr><td>${i+1}</td><td><b>${r.nick}</b></td><td>${r.points}</td><td>${r.wins}</td><td>${r.played}</td><td>${r.prize}€</td></tr>
-        `).join("") : `<tr><td colspan="6" style="color:var(--muted)">Немає турнірів у ${currentYear} або дані не заповнені.</td></tr>`}
+        ${
+          rankArr.length
+            ? rankArr
+                .map(
+                  (r, i) => `
+          <tr><td>${i + 1}</td><td><b>${r.nick}</b></td><td>${r.points}</td><td>${r.wins}</td><td>${r.played}</td><td>${r.prize}€</td></tr>
+        `,
+                )
+                .join("")
+            : `<tr><td colspan="6" style="color:var(--muted)">Немає турнірів у ${currentYear} або дані не заповнені.</td></tr>`
+        }
       </tbody>
     `;
 
-    const toursSorted = [...DATA.tournaments].sort((a,b)=> new Date(b.date)-new Date(a.date));
-    $("tournaments").innerHTML = toursSorted.map(t=>{
-      const parts = (t.participants||[]).sort((a,b)=> (a.place||999)-(b.place||999));
-      return `
+      const toursSorted = [...DATA.tournaments].sort(
+        (a, b) => new Date(b.date) - new Date(a.date),
+      );
+      $("tournaments").innerHTML = toursSorted
+        .map((t) => {
+          const parts = (t.participants || []).sort(
+            (a, b) => (a.place || 999) - (b.place || 999),
+          );
+          return `
         <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10);margin-top:10px">
           <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
             <div>
@@ -635,86 +874,126 @@ END:VCALENDAR`;
           <table>
             <thead><tr><th>Місце</th><th>Нік</th><th>Приз</th></tr></thead>
             <tbody>
-              ${parts.length? parts.map(p=>`
-                <tr><td>${p.place||""}</td><td><b>${p.nick}</b></td><td>${p.prize? p.prize+"€":"—"}</td></tr>
-              `).join("") : `<tr><td colspan="3" style="color:var(--muted)">Немає даних по учасниках.</td></tr>`}
+              ${
+                parts.length
+                  ? parts
+                      .map(
+                        (p) => `
+                <tr><td>${p.place || ""}</td><td><b>${p.nick}</b></td><td>${p.prize ? p.prize + "€" : "—"}</td></tr>
+              `,
+                      )
+                      .join("")
+                  : `<tr><td colspan="3" style="color:var(--muted)">Немає даних по учасниках.</td></tr>`
+              }
             </tbody>
           </table>
         </div>
       `;
-    }).join("");
+        })
+        .join("");
 
-    const players = [...DATA.players].sort((a,b)=> a.nick.localeCompare(b.nick));
-    $("playersTable").innerHTML = `
+      const players = [...DATA.players].sort((a, b) =>
+        a.nick.localeCompare(b.nick),
+      );
+      $("playersTable").innerHTML = `
       <thead><tr><th>Нік</th><th>Турніри ${currentYear}</th><th>Призові</th></tr></thead>
       <tbody>
-        ${players.map(p=>{
-          const st = stats.get(p.nick);
-          const played = st?.played || 0;
-          const prize  = st?.prize || 0;
-          return `<tr data-nick="${p.nick}" style="cursor:pointer">
+        ${players
+          .map((p) => {
+            const st = stats.get(p.nick);
+            const played = st?.played || 0;
+            const prize = st?.prize || 0;
+            return `<tr data-nick="${p.nick}" style="cursor:pointer">
             <td><b>${p.nick}</b></td><td>${played}</td><td>${prize}€</td>
           </tr>`;
-        }).join("")}
+          })
+          .join("")}
       </tbody>
     `;
-    $("playersTable").addEventListener("click",(e)=>{
-      const tr = e.target.closest("tr[data-nick]");
-      if(!tr) return;
-      const nick = tr.dataset.nick;
-      const st = stats.get(nick);
-      $("pTitle").textContent = `@${nick}`;
-      if(!st){
-        $("pBody").innerHTML = `<div class="sub">У ${currentYear} поки немає турнірів/участі для цього гравця.</div>`;
-        return;
-      }
-      const list = st.tours.sort((a,b)=> new Date(b.date)-new Date(a.date))
-        .map(x=>`<li>${fmtDate(x.date)} · <b>${x.tournament}</b> — місце: ${x.place||"—"}, приз: ${x.prize||0}€</li>`).join("");
-      $("pBody").innerHTML = `
+      $("playersTable").addEventListener("click", (e) => {
+        const tr = e.target.closest("tr[data-nick]");
+        if (!tr) return;
+        const nick = tr.dataset.nick;
+        const st = stats.get(nick);
+        $("pTitle").textContent = `@${nick}`;
+        if (!st) {
+          $("pBody").innerHTML =
+            `<div class="sub">У ${currentYear} поки немає турнірів/участі для цього гравця.</div>`;
+          return;
+        }
+        const list = st.tours
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .map(
+            (x) =>
+              `<li>${fmtDate(x.date)} · <b>${x.tournament}</b> — місце: ${x.place || "—"}, приз: ${x.prize || 0}€</li>`,
+          )
+          .join("");
+        $("pBody").innerHTML = `
         <div class="sub">Очки: <b>${st.points}</b> · Перемоги: <b>${st.wins}</b> · Турнірів: <b>${st.played}</b> · Призові: <b>${st.prize}€</b></div>
         <div style="height:10px"></div>
         <ul class="sub" style="margin:0;padding-left:18px;line-height:1.7">${list}</ul>
       `;
-    });
+      });
 
-    function nextBirthday(bday){
-      const d0 = new Date(bday+"T12:00:00");
-      const now = new Date();
-      const d = new Date(now.getFullYear(), d0.getMonth(), d0.getDate(), 12,0,0);
-      if(d < now) d.setFullYear(now.getFullYear()+1);
-      return d;
-    }
-    const bdays = DATA.players.filter(p=>p.birthday)
-      .map(p=>({nick:p.nick, birthday:p.birthday, next: nextBirthday(p.birthday)}))
-      .sort((a,b)=> a.next - b.next);
-    $("bdayTable").innerHTML = `
+      function nextBirthday(bday) {
+        const d0 = new Date(bday + "T12:00:00");
+        const now = new Date();
+        const d = new Date(
+          now.getFullYear(),
+          d0.getMonth(),
+          d0.getDate(),
+          12,
+          0,
+          0,
+        );
+        if (d < now) d.setFullYear(now.getFullYear() + 1);
+        return d;
+      }
+      const bdays = DATA.players
+        .filter((p) => p.birthday)
+        .map((p) => ({
+          nick: p.nick,
+          birthday: p.birthday,
+          next: nextBirthday(p.birthday),
+        }))
+        .sort((a, b) => a.next - b.next);
+      $("bdayTable").innerHTML = `
       <thead><tr><th>Нік</th><th>ДН</th><th>Найближчий</th></tr></thead>
       <tbody>
-        ${bdays.length? bdays.map(x=>`
-          <tr><td><b>${x.nick}</b></td><td>${fmtDate(x.birthday)}</td><td>${x.next.toLocaleDateString(undefined,{month:"short", day:"2-digit"})}</td></tr>
-        `).join("") : `<tr><td colspan="3" style="color:var(--muted)">Дні народження не заповнені.</td></tr>`}
+        ${
+          bdays.length
+            ? bdays
+                .map(
+                  (x) => `
+          <tr><td><b>${x.nick}</b></td><td>${fmtDate(x.birthday)}</td><td>${x.next.toLocaleDateString(undefined, { month: "short", day: "2-digit" })}</td></tr>
+        `,
+                )
+                .join("")
+            : `<tr><td colspan="3" style="color:var(--muted)">Дні народження не заповнені.</td></tr>`
+        }
       </tbody>
     `;
 
-    function ytEmbed(url){
-      const u = new URL(url);
-      const id = u.searchParams.get("v") || (u.pathname.split("/").pop());
-      return `https://www.youtube.com/embed/${id}`;
-    }
+      function ytEmbed(url) {
+        const u = new URL(url);
+        const id = u.searchParams.get("v") || u.pathname.split("/").pop();
+        return `https://www.youtube.com/embed/${id}`;
+      }
 
-    $("mediaList").innerHTML = DATA.media.map(m=>{
-      if(m.type==="youtube"){
-        return `
+      $("mediaList").innerHTML = DATA.media
+        .map((m) => {
+          if (m.type === "youtube") {
+            return `
           <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10);margin-top:10px">
             <div style="font-size:14px"><b>${m.title}</b></div>
             <div style="height:10px"></div>
             <iframe class="yt" src="${ytEmbed(m.url)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         `;
-      }
-      if(m.type==="instagram"){
-        const n = normalizeIG(m.url);
-        return `
+          }
+          if (m.type === "instagram") {
+            const n = normalizeIG(m.url);
+            return `
           <div class="igcard" style="margin-top:10px">
             <div class="top">
               <b>${m.title}</b>
@@ -731,31 +1010,32 @@ END:VCALENDAR`;
             </div>
           </div>
         `;
-      }
-      return `
+          }
+          return `
         <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10);margin-top:10px">
           <div style="font-size:14px"><b>${m.title}</b></div>
           <div class="sub"><a href="${m.url}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.78)">${m.url}</a></div>
         </div>
       `;
-    }).join("");
+        })
+        .join("");
 
-    // Init
-    $("year").textContent = new Date().getFullYear();
-    renderEvents();
-    tick();
-    setInterval(tick, 1000);
-  </script>
+      // Init
+      $("year").textContent = new Date().getFullYear();
+      renderEvents();
+      tick();
+      setInterval(tick, 1000);
+    </script>
 
-  <!-- IMPORTANT: Instagram official embed script -->
-  <script async src="https://www.instagram.com/embed.js"></script>
-  <script>
-    // Ask Instagram to process embeds after DOM is ready
-    window.addEventListener("load", () => {
-      if (window.instgrm && window.instgrm.Embeds) {
-        window.instgrm.Embeds.process();
-      }
-    });
-  </script>
-</body>
+    <!-- IMPORTANT: Instagram official embed script -->
+    <script async src="https://www.instagram.com/embed.js"></script>
+    <script>
+      // Ask Instagram to process embeds after DOM is ready
+      window.addEventListener("load", () => {
+        if (window.instgrm && window.instgrm.Embeds) {
+          window.instgrm.Embeds.process();
+        }
+      });
+    </script>
+  </body>
 </html>
