@@ -35,13 +35,11 @@
         linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x:hidden;
     }
-
     .grain{
       pointer-events:none; position:fixed; inset:0; opacity:.13; mix-blend-mode:overlay;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
       background-size:220px 220px;
     }
-
     .wrap{max-width:1180px; margin:0 auto; padding:22px 14px 70px;}
 
     /* top */
@@ -76,7 +74,7 @@
     .dot{width:7px;height:7px;border-radius:999px;background:var(--gold); box-shadow:0 0 14px rgba(216,178,90,.35)}
     .dot.red{background:var(--red); box-shadow:0 0 14px rgba(255,59,59,.35)}
 
-    /* HERO like poster */
+    /* HERO */
     .hero{
       border-radius:calc(var(--r) + 10px);
       background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
@@ -97,7 +95,6 @@
       pointer-events:none;
       z-index:-1;
     }
-
     .laser{
       position:absolute; top:-40px; right:-30px;
       width:340px; height:520px;
@@ -126,25 +123,19 @@
       pointer-events:none;
       z-index:1;
     }
-
-    /* NEW: hero grid with "phone poster" */
     .heroGrid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap:16px;
       align-items:stretch;
+      position:relative;
+      z-index:2;
     }
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
     }
-    .heroLeft{position:relative; z-index:2}
-    .heroRight{
-      position:relative; z-index:2;
-      display:flex; align-items:center; justify-content:flex-end;
-    }
-    @media (max-width:980px){
-      .heroRight{justify-content:flex-start}
-    }
+    .heroRight{display:flex; align-items:center; justify-content:flex-end}
+    @media (max-width:980px){ .heroRight{justify-content:flex-start} }
 
     .phone{
       width:min(360px, 100%);
@@ -155,37 +146,16 @@
       overflow:hidden;
       position:relative;
     }
-    .phone:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(180px 160px at 20% 10%, rgba(216,178,90,.22), transparent 70%),
-        radial-gradient(220px 200px at 80% 30%, rgba(255,59,59,.18), transparent 70%);
-      filter:blur(10px);
-      opacity:.9;
-      pointer-events:none;
-    }
     .phoneTop{
-      position:relative;
       display:flex; align-items:center; justify-content:space-between;
       padding:12px 12px;
       border-bottom:1px solid rgba(255,255,255,.10);
       background:rgba(0,0,0,.22);
-      z-index:2;
     }
     .phoneTop b{font-size:12.5px; color:rgba(255,255,255,.88)}
     .phoneTop span{font-size:12px; color:var(--muted); font-family:var(--mono); letter-spacing:.08em}
-    .phoneBody{position:relative; padding:12px; z-index:2}
-    .igHeroEmbed{
-      width:100%;
-      border:0;
-      border-radius:18px;
-      background:#000;
-      min-height:560px;
-    }
-    @media (max-width: 980px){
-      .igHeroEmbed{min-height:520px}
-    }
+    .phoneBody{padding:12px}
+
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
       font-family:var(--mono);
@@ -211,6 +181,7 @@
       font-size:15px;
       line-height:1.6;
     }
+
     .ctas{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
     .btn{
       appearance:none; border:none; cursor:pointer;
@@ -229,9 +200,6 @@
       background:linear-gradient(135deg, rgba(216,178,90,.30), rgba(255,255,255,.08));
       border-color:rgba(216,178,90,.38);
     }
-    .btn.primary:hover{
-      background:linear-gradient(135deg, rgba(216,178,90,.36), rgba(255,255,255,.10));
-    }
     .btn.red{
       background:linear-gradient(135deg, rgba(255,59,59,.22), rgba(255,255,255,.06));
       border-color:rgba(255,59,59,.35);
@@ -241,7 +209,6 @@
     }
     .mini{padding:10px 12px;border-radius:12px;font-size:13px}
 
-    /* info chips */
     .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
     .chip{
       display:inline-flex; gap:8px; align-items:center;
@@ -257,7 +224,6 @@
     /* layout */
     .grid{margin-top:14px; display:grid; grid-template-columns: 1.25fr .75fr; gap:12px;}
     @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
-
     .card{
       border-radius:var(--r);
       background:rgba(255,255,255,.06);
@@ -310,7 +276,7 @@
     .num{font-size:20px; font-family:var(--mono); color:var(--gold2)}
     .lbl{font-size:12px; color:var(--muted); margin-top:4px}
 
-    /* role randomizer */
+    /* fun boxes */
     .rolebox{
       display:grid; gap:10px;
       padding:14px; border-radius:16px;
@@ -319,9 +285,10 @@
     }
     .role{
       font-family:var(--mono);
-      font-size:18px;
-      letter-spacing:.04em;
+      font-size:16px;
+      letter-spacing:.02em;
       color:var(--gold2);
+      line-height:1.35;
     }
     .small{font-size:12.5px;color:var(--muted);line-height:1.5;margin:0}
 
@@ -357,7 +324,7 @@
       background:rgba(0,0,0,.22);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)
     }
 
-    /* Instagram posts grid */
+    /* Instagram tiles */
     .iggrid{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px}
     @media (max-width: 900px){.iggrid{grid-template-columns:repeat(2, 1fr)}}
     @media (max-width: 520px){.iggrid{grid-template-columns:1fr}}
@@ -366,7 +333,6 @@
       overflow:hidden;
       border:1px solid rgba(255,255,255,.12);
       background:rgba(0,0,0,.25);
-      min-height:210px;
       position:relative;
     }
     .igcard .top{
@@ -378,13 +344,7 @@
     .igcard .top b{font-size:12.5px; color:rgba(255,255,255,.86)}
     .igcard .top span{font-size:12px; color:var(--muted)}
     .igcard .body{padding:12px}
-    .igembed{
-      width:100%;
-      border:0;
-      border-radius:12px;
-      background:#000;
-      min-height:380px;
-    }
+
     .igfallback{
       padding:14px;
       border-radius:12px;
@@ -394,8 +354,6 @@
       font-size:13px;
       line-height:1.55;
     }
-
-    /* YouTube */
     .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:16px;background:#000}
 
     footer{margin-top:16px;color:var(--muted);font-size:12.5px;line-height:1.6;text-align:center}
@@ -418,7 +376,7 @@
       </a>
       <div class="pillrow">
         <div class="pill"><span class="dot"></span> Brahmsweg 17 · 24159 Kiel</div>
-        <div class="pill"><span class="dot red"></span> Теми & Dress code</div>
+        <div class="pill"><span class="dot red"></span> Telegram: @kieler_mafia</div>
       </div>
     </div>
 
@@ -447,6 +405,7 @@
             <a class="btn red" href="#announcements"><span>📅</span> Анонси</a>
             <a class="btn" href="#club"><span>🖤</span> Про клуб</a>
             <a class="btn" href="#hub"><span>🏆</span> Рейтинг</a>
+            <a class="btn" href="https://t.me/kieler_mafia" target="_blank" rel="noopener"><span>📣</span> Telegram канал</a>
           </div>
         </div>
 
@@ -456,19 +415,16 @@
               <b>Featured</b>
               <span id="heroTag">REEL</span>
             </div>
-            <div class="phoneBody" id="heroEmbedWrap">
-              <!-- injected by JS -->
-            </div>
+            <div class="phoneBody" id="heroEmbedWrap"></div>
           </div>
         </div>
-
       </div>
     </section>
 
     <section class="grid section">
       <div class="card" id="announcements">
         <h3>Анонси найближчих ігор</h3>
-        <p class="sub">Кнопка “Add to Calendar” додає подію. Запис — через DM або email (кнопка “Записатися”).</p>
+        <p class="sub">Кнопка “Add to Calendar” додає подію. Запис — через Telegram/DM або email (кнопка “Записатися”).</p>
         <div class="events" id="events"></div>
       </div>
 
@@ -495,6 +451,21 @@
           <p class="small">Фановий генератор для атмосфери (не справжній розподіл ролей 😉).</p>
           <button class="btn mini" id="btnRole" type="button">🎲 Випадкова роль</button>
         </div>
+
+        <div style="height:14px"></div>
+
+        <h3>Алібі та цитата дня 🖤</h3>
+        <div class="rolebox">
+          <div class="role" id="alibiText">Натисни “Згенерувати алібі”</div>
+          <button class="btn mini" id="btnAlibi" type="button">🧾 Згенерувати алібі</button>
+
+          <div style="height:14px"></div>
+
+          <div class="role" id="quoteText">Натисни “Цитата дня”</div>
+          <button class="btn mini" id="btnQuote" type="button">🖤 Цитата дня</button>
+
+          <p class="small" style="margin-top:8px">Можна юзати як “слово ведучого” перед стартом гри 😄</p>
+        </div>
       </div>
     </section>
 
@@ -508,13 +479,23 @@
         <div class="chips">
           <span class="chip"><span class="c"></span> Локація: <b>Brahmsweg 17</b></span>
           <span class="chip"><span class="c"></span> Місто: <b>Kiel</b></span>
-          <span class="chip"><span class="c red"></span> DM: <b>@kieler.mafia.club</b></span>
+          <span class="chip"><span class="c red"></span> Telegram: <b>@kieler_mafia</b></span>
         </div>
+
         <div style="height:10px"></div>
+
         <p class="sub" style="margin:0">
-          <b>Як записатися:</b> натисни “Записатися” або пиши в DM.
+          <b>Як записатися:</b> натисни “Записатися” або напиши в Telegram / Instagram.
           У повідомленні вкажи: <i>дата/тема, ім’я, скільки людей</i>.
         </p>
+
+        <div style="height:12px"></div>
+
+        <div class="ctas">
+          <a class="btn mini" href="https://t.me/kieler_mafia" target="_blank" rel="noopener">📣 Telegram канал</a>
+          <a class="btn mini" href="https://t.me/ksenyashvets19" target="_blank" rel="noopener">💬 Telegram @ksenyashvets19</a>
+          <a class="btn mini" href="https://t.me/OksanaKolivanova" target="_blank" rel="noopener">💬 Telegram @OksanaKolivanova</a>
+        </div>
       </div>
 
       <div class="card" id="rules">
@@ -532,7 +513,7 @@
     <section class="card section" id="photos">
       <h3>Фото / пости з Instagram</h3>
       <p class="sub">
-    
+        Тут підтягуються пости як “плитки”. Якщо embed не показується — натисни “Відкрити пост”.
       </p>
       <div class="iggrid" id="iggrid"></div>
     </section>
@@ -589,11 +570,13 @@
 
     <footer>
       <div>
-        DM: <a href="https://instagram.com/oksana_kolivanova" target="_blank" rel="noopener">@oksana_kolivanova</a>
+        Telegram канал: <a href="https://t.me/kieler_mafia" target="_blank" rel="noopener">@kieler_mafia</a>
         <span class="sep">·</span>
-        <a href="https://instagram.com/oksanashvetsukr" target="_blank" rel="noopener">@oksanashvetsukr</a>
+        Контакти: <a href="https://t.me/ksenyashvets19" target="_blank" rel="noopener">@ksenyashvets19</a>
         <span class="sep">·</span>
-        Instagram клубу: <a href="https://instagram.com/kieler.mafia.club" target="_blank" rel="noopener">@kieler.mafia.club</a>
+        <a href="https://t.me/OksanaKolivanova" target="_blank" rel="noopener">@OksanaKolivanova</a>
+        <span class="sep">·</span>
+        Instagram: <a href="https://instagram.com/kieler.mafia.club" target="_blank" rel="noopener">@kieler.mafia.club</a>
       </div>
       <div style="margin-top:6px">© <span id="year"></span> Mafia Kiel · made with 🖤</div>
     </footer>
@@ -607,14 +590,15 @@
       instagram: "https://instagram.com/kieler.mafia.club",
       email: "kieler.mafia.club@gmail.com",
       location: "Brahmsweg 17, 24159 Kiel",
-      hosts: [
-        "https://instagram.com/oksana_kolivanova",
-        "https://instagram.com/oksanashvetsukr"
+      telegramChannel: "https://t.me/kieler_mafia",
+      telegramContacts: [
+        { handle: "@ksenyashvets19", link: "https://t.me/ksenyashvets19" },
+        { handle: "@OksanaKolivanova", link: "https://t.me/OksanaKolivanova" }
       ]
     };
 
     // =========================
-    // EDIT: HERO featured (те, що “підтягуємо зверху”)
+    // EDIT: HERO featured
     // =========================
     const HERO_FEATURE = {
       title: "Reel",
@@ -640,7 +624,7 @@
         dateTime: "2026-03-20T18:30:00+01:00",
         warmup: "17:30 · для новачків",
         game: "18:30 · ігри",
-        price: "Уточнюй у DM",
+        price: "Уточнюй у DM / Telegram",
         place: CLUB.location,
         dress: "Free style",
         tags: ["regular"],
@@ -648,14 +632,11 @@
     ];
 
     // =========================
-    // EDIT: Instagram posts (фото/пости)
+    // EDIT: Instagram posts (плитки)
     // =========================
     const IG_POSTS = [
-      { title:"Фото / репорт", url:"https://www.instagram.com/p/DUyP-TADaGV/" },
-      { title:"Фото (img index)", url:"https://www.instagram.com/p/DUyP-TADaGV/?img_index=1" },
-      { title:"Анонс", url:"https://www.instagram.com/p/DP7QW1BDD-4/" },
-      { title:"Фото / репорт", url:"https://www.instagram.com/p/DUdPFrajfEd/" },
-      { title:"Анонс", url:"https://www.instagram.com/p/DQWTfb7DUG6/" },
+      { title:"Репорт", url:"https://www.instagram.com/p/DUyP-TADaGV/" },
+      { title:"Reel",   url:"https://www.instagram.com/reel/DPd1lejDEOf/" }
     ];
 
     // =========================
@@ -700,22 +681,20 @@
       return d.toLocaleDateString(undefined,{year:"numeric", month:"short", day:"2-digit"});
     }
 
-    // normalize IG url to embed
     function normalizeIG(url){
       try{
         const u = new URL(url);
         const parts = u.pathname.split("/").filter(Boolean);
-        // support /p/{code}/, /reel/{code}/, /tv/{code}/
         const types = ["p","reel","tv"];
         for(const t of types){
           const idx = parts.indexOf(t);
           if(idx >= 0 && parts[idx+1]){
             const code = parts[idx+1];
-            return { type:t, code, embed:`https://www.instagram.com/${t}/${code}/embed` };
+            return { type:t, code, permalink:`https://www.instagram.com/${t}/${code}/` };
           }
         }
       }catch(e){}
-      return { type:"", code:"", embed:"" };
+      return { type:"", code:"", permalink:url };
     }
 
     function buildICS(ev){
@@ -729,7 +708,7 @@
       const uid = `mafia-kiel-${start.getTime()}@mafiakiel`;
       const title = ev.title.replace(/[,;]/g," ");
       const loc = (ev.place || "").replace(/[,;]/g," ");
-      const desc = [ev.warmup||"", ev.game||"", ev.price?`Ціна: ${ev.price}`:"", ev.dress?`Dress code: ${ev.dress}`:"", "Запис: DM/Email"].filter(Boolean).join("\\n");
+      const desc = [ev.warmup||"", ev.game||"", ev.price?`Ціна: ${ev.price}`:"", ev.dress?`Dress code: ${ev.dress}`:"", "Запис: Telegram/DM/Email"].filter(Boolean).join("\\n");
       const ics =
 `BEGIN:VCALENDAR
 VERSION:2.0
@@ -750,49 +729,45 @@ END:VCALENDAR`;
     }
 
     // =========================
-    // Hero embed (phone poster)
+    // Hero embed (official IG)
     // =========================
     (function renderHeroEmbed(){
       const n = normalizeIG(HERO_FEATURE.url);
       $("heroTag").textContent = (n.type || HERO_FEATURE.title || "IG").toUpperCase();
       const wrap = $("heroEmbedWrap");
-      if(!n.embed){
-        wrap.innerHTML = `
-          <div class="igfallback">
-            Не вдалося підготувати embed. Відкрий: <a href="${HERO_FEATURE.url}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.85)">${HERO_FEATURE.url}</a>
-          </div>
-          <div style="height:10px"></div>
-          <a class="btn mini" href="${HERO_FEATURE.url}" target="_blank" rel="noopener">Відкрити ↗</a>
-        `;
-        return;
-      }
       wrap.innerHTML = `
-        <iframe class="igHeroEmbed" src="${n.embed}" loading="lazy" scrolling="no" allowtransparency="true"></iframe>
+        <blockquote class="instagram-media"
+          data-instgrm-permalink="${n.permalink}"
+          data-instgrm-version="14"
+          style="background:#000; border:0; margin:0; width:100%; border-radius:18px; overflow:hidden;">
+        </blockquote>
         <div style="height:10px"></div>
-        <a class="btn mini" href="${HERO_FEATURE.url}" target="_blank" rel="noopener">Відкрити Reel ↗</a>
+        <a class="btn mini" href="${n.permalink}" target="_blank" rel="noopener">Відкрити ↗</a>
       `;
     })();
 
     // =========================
-    // Signup
+    // Signup (Telegram-first)
     // =========================
     function signup(){
       const subject = encodeURIComponent("Запис на мафію · Mafia Kiel");
       const body = encodeURIComponent(
         "Привіт! Хочу записатися на мафію.\n" +
         "Дата/тема: ____\nІм’я: ____\nСкільки людей: ____\n\n" +
-        "Локація: " + CLUB.location + "\nInstagram: " + CLUB.instagram
+        "Локація: " + CLUB.location + "\nInstagram: " + CLUB.instagram + "\nTelegram: " + CLUB.telegramChannel
       );
       const mailto = `mailto:${CLUB.email}?subject=${subject}&body=${body}`;
+
       const msg =
 `Як записатися?
-1) DM клубу: ${CLUB.instagram}
-2) DM організаторам:
-- ${CLUB.hosts[0]}
-- ${CLUB.hosts[1]}
-3) Email: ${CLUB.email}
+1) Telegram канал (анонси): ${CLUB.telegramChannel}
+2) Telegram контакти:
+- ${CLUB.telegramContacts[0].handle}
+- ${CLUB.telegramContacts[1].handle}
+3) Instagram DM: ${CLUB.instagram}
+4) Email: ${CLUB.email}
 
-Натисни OK — відкрию Email.`;
+Натисни OK — відкрию Email (як запасний варіант).`;
       if(confirm(msg)) window.location.href = mailto;
     }
     $("btnSignup").addEventListener("click",(e)=>{e.preventDefault(); signup();});
@@ -883,40 +858,53 @@ END:VCALENDAR`;
       $("role").textContent = `${r.name} — ${r.hint}`;
     });
 
-    <div style="height:14px"></div>
+    // =========================
+    // Alibi + Quote
+    // =========================
+    const ALIBIS = [
+      "Я просто прийшов(ла) за кавою… і випадково опинився(лась) тут ☕",
+      "Я мовчав(ла), бо аналізував(ла), а не тому що я мафія.",
+      "Мене підставили. Я занадто красивий(а), щоб бути мафією 😎",
+      "Я голосував(ла) логічно. Якщо це злочин — арештовуйте.",
+      "Я просто спостерігав(ла). Місто потребує мізків, не криків.",
+      "Я не підозрілий(а). Я просто інтроверт(ка) 🫠",
+      "Я не зливав(ла) нікого. Я рятував(ла) місто… по-своєму.",
+      "Я дивився(лась) на реакції. І зараз бачу, хто грає роль.",
+      "У мене алібі залізне: я навіть правил не дочекався(лась) — вже зрозумів(ла) хто мафія.",
+      "Я був(ла) мафією тільки в душі. На столі — ні 😇"
+    ];
 
-<h3>Алібі та цитата дня 🖤</h3>
-<div class="rolebox">
-  <div class="role" id="alibiText">Натисни “Згенерувати алібі”</div>
-  <button class="btn mini" id="btnAlibi" type="button">🧾 Згенерувати алібі</button>
+    const QUOTES = [
+      "Місто засинає… але правда не спить.",
+      "Тиша — найкращий костюм мафії.",
+      "Не той винен, хто підозрілий. А той, хто надто переконливий.",
+      "Слова — це дим. Факти — це вогонь.",
+      "Якщо ти всім подобаєшся — ти або геній, або мафія.",
+      "Сьогодні ми граємо в мафію. Завтра — вона грає нами.",
+      "Довіра — валюта. Брехня — відсотки.",
+      "Поганий хід — теж хід. Гірше — не зробити жодного.",
+      "Перемога любить спокій. Мафія — хаос.",
+      "Завжди слухай місто. Особливо коли воно мовчить."
+    ];
 
-  <div style="height:14px"></div>
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
-  <div class="role" id="quoteText">Натисни “Цитата дня”</div>
-  <button class="btn mini" id="btnQuote" type="button">🖤 Цитата дня</button>
-</div>
-// ===========================
-// Alibi Generator
-// ===========================
-const ALIBIS = [
-  "Я просто прийшов(ла) за кавою… і випадково опинився(лась) тут ☕",
-  "Я мовчав(ла), бо аналізував(ла), а не тому що я мафія.",
-  "Мене підставили. Я занадто красивий(а), щоб бути мафією 😎",
-  "Я голосував(ла) логічно. Якщо це злочин — арештовуйте.",
-  "Я просто спостерігав(ла). Місто потребує м
+    $("btnAlibi").addEventListener("click", ()=>{
+      $("alibiText").textContent = pick(ALIBIS);
+    });
 
+    $("btnQuote").addEventListener("click", ()=>{
+      $("quoteText").textContent = "“" + pick(QUOTES) + "”";
+    });
 
     // =========================
-    // Instagram tiles
+    // Instagram tiles (blockquote embeds)
     // =========================
     const grid = $("iggrid");
     grid.innerHTML = IG_POSTS.map((p,i)=>{
       const n = normalizeIG(p.url);
       const title = p.title || "Instagram";
       const label = n.code ? `#${n.code}` : `Post ${i+1}`;
-      const iframe = n.embed
-        ? `<iframe class="igembed" src="${n.embed}" loading="lazy" scrolling="no" allowtransparency="true"></iframe>`
-        : `<div class="igfallback">Посилання: <a href="${p.url}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.85)">${p.url}</a></div>`;
       return `
         <div class="igcard">
           <div class="top">
@@ -924,9 +912,13 @@ const ALIBIS = [
             <span>${label}</span>
           </div>
           <div class="body">
-            ${iframe}
+            <blockquote class="instagram-media"
+              data-instgrm-permalink="${n.permalink}"
+              data-instgrm-version="14"
+              style="background:#000; border:0; margin:0; width:100%; border-radius:12px; overflow:hidden;">
+            </blockquote>
             <div style="height:10px"></div>
-            <a class="btn mini" href="${p.url}" target="_blank" rel="noopener">Відкрити ↗</a>
+            <a class="btn mini" href="${n.permalink}" target="_blank" rel="noopener">Відкрити ↗</a>
           </div>
         </div>
       `;
@@ -980,7 +972,6 @@ const ALIBIS = [
       </tbody>
     `;
 
-    // Tournaments view
     const toursSorted = [...DATA.tournaments].sort((a,b)=> new Date(b.date)-new Date(a.date));
     $("tournaments").innerHTML = toursSorted.map(t=>{
       const parts = (t.participants||[]).sort((a,b)=> (a.place||999)-(b.place||999));
@@ -1006,7 +997,6 @@ const ALIBIS = [
       `;
     }).join("");
 
-    // Players + profile
     const players = [...DATA.players].sort((a,b)=> a.nick.localeCompare(b.nick));
     $("playersTable").innerHTML = `
       <thead><tr><th>Нік</th><th>Турніри ${currentYear}</th><th>Призові</th></tr></thead>
@@ -1040,7 +1030,6 @@ const ALIBIS = [
       `;
     });
 
-    // Birthdays
     function nextBirthday(bday){
       const d0 = new Date(bday+"T12:00:00");
       const now = new Date();
@@ -1060,7 +1049,6 @@ const ALIBIS = [
       </tbody>
     `;
 
-    // Media
     function ytEmbed(url){
       const u = new URL(url);
       const id = u.searchParams.get("v") || (u.pathname.split("/").pop());
@@ -1079,9 +1067,6 @@ const ALIBIS = [
       }
       if(m.type==="instagram"){
         const n = normalizeIG(m.url);
-        const embed = n.embed
-          ? `<iframe class="igembed" src="${n.embed}" loading="lazy" scrolling="no" allowtransparency="true"></iframe>`
-          : `<div class="igfallback">Посилання: <a href="${m.url}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.85)">${m.url}</a></div>`;
         return `
           <div class="igcard" style="margin-top:10px">
             <div class="top">
@@ -1089,9 +1074,13 @@ const ALIBIS = [
               <span>${n.type ? n.type.toUpperCase() : "IG"}</span>
             </div>
             <div class="body">
-              ${embed}
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="${n.permalink}"
+                data-instgrm-version="14"
+                style="background:#000; border:0; margin:0; width:100%; border-radius:12px; overflow:hidden;">
+              </blockquote>
               <div style="height:10px"></div>
-              <a class="btn mini" href="${m.url}" target="_blank" rel="noopener">Відкрити ↗</a>
+              <a class="btn mini" href="${n.permalink}" target="_blank" rel="noopener">Відкрити ↗</a>
             </div>
           </div>
         `;
@@ -1109,6 +1098,17 @@ const ALIBIS = [
     renderEvents();
     tick();
     setInterval(tick, 1000);
+  </script>
+
+  <!-- IMPORTANT: Instagram official embed script -->
+  <script async src="https://www.instagram.com/embed.js"></script>
+  <script>
+    // Ask Instagram to process embeds after DOM is ready
+    window.addEventListener("load", () => {
+      if (window.instgrm && window.instgrm.Embeds) {
+        window.instgrm.Embeds.process();
+      }
+    });
   </script>
 </body>
 </html>
