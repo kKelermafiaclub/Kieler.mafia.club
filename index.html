@@ -36,7 +36,6 @@
       overflow-x:hidden;
     }
 
-    /* film grain */
     .grain{
       pointer-events:none; position:fixed; inset:0; opacity:.13; mix-blend-mode:overlay;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
@@ -98,7 +97,7 @@
       pointer-events:none;
       z-index:-1;
     }
-    /* red “laser” lines right side (instagram poster vibe) */
+
     .laser{
       position:absolute; top:-40px; right:-30px;
       width:340px; height:520px;
@@ -111,8 +110,7 @@
           rgba(255,59,59,.28) 12px,
           rgba(255,59,59,.0) 22px
         );
-      filter:blur(.2px);
-      opacity:.8;
+      opacity:.85;
       transform:rotate(8deg);
       mask-image:radial-gradient(circle at 30% 50%, rgba(0,0,0,1), rgba(0,0,0,0) 70%);
       pointer-events:none;
@@ -124,12 +122,70 @@
       background:
         radial-gradient(circle at 50% 50%, rgba(255,255,255,.9), rgba(255,255,255,0) 55%),
         radial-gradient(circle at 55% 55%, rgba(255,59,59,.45), rgba(255,59,59,0) 60%);
-      opacity:.85; filter:blur(.2px);
+      opacity:.85;
       pointer-events:none;
       z-index:1;
     }
-    .hero > *{position:relative; z-index:2}
 
+    /* NEW: hero grid with "phone poster" */
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns:1fr}
+    }
+    .heroLeft{position:relative; z-index:2}
+    .heroRight{
+      position:relative; z-index:2;
+      display:flex; align-items:center; justify-content:flex-end;
+    }
+    @media (max-width:980px){
+      .heroRight{justify-content:flex-start}
+    }
+
+    .phone{
+      width:min(360px, 100%);
+      border-radius:26px;
+      background:rgba(0,0,0,.28);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 18px 60px rgba(0,0,0,.55);
+      overflow:hidden;
+      position:relative;
+    }
+    .phone:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(180px 160px at 20% 10%, rgba(216,178,90,.22), transparent 70%),
+        radial-gradient(220px 200px at 80% 30%, rgba(255,59,59,.18), transparent 70%);
+      filter:blur(10px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .phoneTop{
+      position:relative;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 12px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.22);
+      z-index:2;
+    }
+    .phoneTop b{font-size:12.5px; color:rgba(255,255,255,.88)}
+    .phoneTop span{font-size:12px; color:var(--muted); font-family:var(--mono); letter-spacing:.08em}
+    .phoneBody{position:relative; padding:12px; z-index:2}
+    .igHeroEmbed{
+      width:100%;
+      border:0;
+      border-radius:18px;
+      background:#000;
+      min-height:560px;
+    }
+    @media (max-width: 980px){
+      .igHeroEmbed{min-height:520px}
+    }
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
       font-family:var(--mono);
@@ -185,6 +241,19 @@
     }
     .mini{padding:10px 12px;border-radius:12px;font-size:13px}
 
+    /* info chips */
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .chip{
+      display:inline-flex; gap:8px; align-items:center;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.20);
+      padding:7px 10px; border-radius:999px;
+      font-size:12.5px; color:rgba(255,255,255,.78);
+    }
+    .chip b{color:rgba(255,255,255,.92)}
+    .chip .c{width:7px;height:7px;border-radius:999px;background:var(--gold)}
+    .chip .c.red{background:var(--red)}
+
     /* layout */
     .grid{margin-top:14px; display:grid; grid-template-columns: 1.25fr .75fr; gap:12px;}
     @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
@@ -198,19 +267,6 @@
     }
     .card h3{margin:0 0 10px; font-size:16px;}
     .sub{color:var(--muted); font-size:13px; line-height:1.55; margin:0 0 12px;}
-
-    /* info chips */
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
-    .chip{
-      display:inline-flex; gap:8px; align-items:center;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.20);
-      padding:7px 10px; border-radius:999px;
-      font-size:12.5px; color:rgba(255,255,255,.78);
-    }
-    .chip b{color:rgba(255,255,255,.92)}
-    .chip .c{width:7px;height:7px;border-radius:999px;background:var(--gold)}
-    .chip .c.red{background:var(--red)}
 
     /* events */
     .events{display:grid; gap:10px}
@@ -274,7 +330,7 @@
     .split{display:grid; grid-template-columns:1fr 1fr; gap:12px}
     @media (max-width: 980px){ .split{grid-template-columns:1fr} }
 
-    /* tabs in hub */
+    /* hub */
     .tabs{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0}
     .tab{
       border:1px solid rgba(255,255,255,.12);
@@ -370,25 +426,42 @@
       <div class="laser"></div>
       <div class="spark"></div>
 
-      <div class="kicker"><span class="mark"></span> Kieler Mafia Club</div>
-      <h2>MAFIA <span>FRIDAY</span> · KIEL</h2>
-      <p>
-        Ніколи не грав(ла) в мафію? Навчимо ✌️
-        Спочатку короткий майстер-клас, далі — ігри, інтриги та найкраща компанія.
-      </p>
+      <div class="heroGrid">
+        <div class="heroLeft">
+          <div class="kicker"><span class="mark"></span> Kieler Mafia Club</div>
+          <h2>MAFIA <span>FRIDAY</span> · KIEL</h2>
+          <p>
+            Ніколи не грав(ла) в мафію? Навчимо ✌️
+            Спочатку короткий майстер-клас, далі — ігри, інтриги та найкраща компанія.
+          </p>
 
-      <div class="chips">
-        <span class="chip"><span class="c"></span> <b>17:30</b> майстер-клас</span>
-        <span class="chip"><span class="c"></span> <b>18:30</b> ігри</span>
-        <span class="chip"><span class="c red"></span> інколи: <b>Total Black</b></span>
-      </div>
+          <div class="chips">
+            <span class="chip"><span class="c"></span> <b>17:30</b> майстер-клас</span>
+            <span class="chip"><span class="c"></span> <b>18:30</b> ігри</span>
+            <span class="chip"><span class="c red"></span> інколи: <b>Total Black</b></span>
+          </div>
 
-      <div class="ctas">
-        <a class="btn primary" id="btnSignup" href="#"><span>🕵️</span> Записатися</a>
-        <a class="btn" id="btnIG" href="https://instagram.com/kieler.mafia.club" target="_blank" rel="noopener"><span>📸</span> Instagram</a>
-        <a class="btn red" href="#announcements"><span>📅</span> Анонси</a>
-        <a class="btn" href="#club"><span>🖤</span> Про клуб</a>
-        <a class="btn" href="#hub"><span>🏆</span> Рейтинг</a>
+          <div class="ctas">
+            <a class="btn primary" id="btnSignup" href="#"><span>🕵️</span> Записатися</a>
+            <a class="btn" id="btnIG" href="https://instagram.com/kieler.mafia.club" target="_blank" rel="noopener"><span>📸</span> Instagram</a>
+            <a class="btn red" href="#announcements"><span>📅</span> Анонси</a>
+            <a class="btn" href="#club"><span>🖤</span> Про клуб</a>
+            <a class="btn" href="#hub"><span>🏆</span> Рейтинг</a>
+          </div>
+        </div>
+
+        <div class="heroRight">
+          <div class="phone" aria-label="Featured Instagram reel">
+            <div class="phoneTop">
+              <b>Featured</b>
+              <span id="heroTag">REEL</span>
+            </div>
+            <div class="phoneBody" id="heroEmbedWrap">
+              <!-- injected by JS -->
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -510,7 +583,7 @@
 
     <section class="card section" id="media">
       <h3>Відео / медіа</h3>
-      <p class="sub">YouTube можна вбудувати, а Reels/пости — як посилання.</p>
+      <p class="sub">YouTube можна вбудувати, а Reels/пости — як Instagram embed.</p>
       <div id="mediaList"></div>
     </section>
 
@@ -541,6 +614,14 @@
     };
 
     // =========================
+    // EDIT: HERO featured (те, що “підтягуємо зверху”)
+    // =========================
+    const HERO_FEATURE = {
+      title: "Reel",
+      url: "https://www.instagram.com/reel/DPd1lejDEOf/"
+    };
+
+    // =========================
     // EDIT: АНОНСИ
     // =========================
     const EVENTS = [
@@ -567,17 +648,18 @@
     ];
 
     // =========================
-    // EDIT: Instagram posts (вставляй лінки на пости)
+    // EDIT: Instagram posts (фото/пости)
     // =========================
     const IG_POSTS = [
       { title:"Фото / репорт", url:"https://www.instagram.com/p/DUyP-TADaGV/" },
+      { title:"Фото (img index)", url:"https://www.instagram.com/p/DUyP-TADaGV/?img_index=1" },
       { title:"Анонс", url:"https://www.instagram.com/p/DP7QW1BDD-4/" },
       { title:"Фото / репорт", url:"https://www.instagram.com/p/DUdPFrajfEd/" },
       { title:"Анонс", url:"https://www.instagram.com/p/DQWTfb7DUG6/" },
     ];
 
     // =========================
-    // EDIT: HUB data
+    // EDIT: HUB data + media
     // =========================
     const DATA = {
       tournaments: [
@@ -598,8 +680,9 @@
         { nick:"yalemonchik", birthday:"1997-02-14" },
       ],
       media: [
+        { type:"instagram", title:"Reel (клуб)", url:"https://www.instagram.com/reel/DPd1lejDEOf/" },
+        { type:"instagram", title:"Пост (репорт)", url:"https://www.instagram.com/p/DUyP-TADaGV/" },
         { type:"youtube", title:"Best moments (приклад)", url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-        { type:"link", title:"Instagram клубу", url:"https://instagram.com/kieler.mafia.club" },
       ]
     };
 
@@ -615,6 +698,24 @@
     function fmtDate(ymd){
       const d = new Date(ymd+"T12:00:00");
       return d.toLocaleDateString(undefined,{year:"numeric", month:"short", day:"2-digit"});
+    }
+
+    // normalize IG url to embed
+    function normalizeIG(url){
+      try{
+        const u = new URL(url);
+        const parts = u.pathname.split("/").filter(Boolean);
+        // support /p/{code}/, /reel/{code}/, /tv/{code}/
+        const types = ["p","reel","tv"];
+        for(const t of types){
+          const idx = parts.indexOf(t);
+          if(idx >= 0 && parts[idx+1]){
+            const code = parts[idx+1];
+            return { type:t, code, embed:`https://www.instagram.com/${t}/${code}/embed` };
+          }
+        }
+      }catch(e){}
+      return { type:"", code:"", embed:"" };
     }
 
     function buildICS(ev){
@@ -647,6 +748,30 @@ END:VEVENT
 END:VCALENDAR`;
       return "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
     }
+
+    // =========================
+    // Hero embed (phone poster)
+    // =========================
+    (function renderHeroEmbed(){
+      const n = normalizeIG(HERO_FEATURE.url);
+      $("heroTag").textContent = (n.type || HERO_FEATURE.title || "IG").toUpperCase();
+      const wrap = $("heroEmbedWrap");
+      if(!n.embed){
+        wrap.innerHTML = `
+          <div class="igfallback">
+            Не вдалося підготувати embed. Відкрий: <a href="${HERO_FEATURE.url}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.85)">${HERO_FEATURE.url}</a>
+          </div>
+          <div style="height:10px"></div>
+          <a class="btn mini" href="${HERO_FEATURE.url}" target="_blank" rel="noopener">Відкрити ↗</a>
+        `;
+        return;
+      }
+      wrap.innerHTML = `
+        <iframe class="igHeroEmbed" src="${n.embed}" loading="lazy" scrolling="no" allowtransparency="true"></iframe>
+        <div style="height:10px"></div>
+        <a class="btn mini" href="${HERO_FEATURE.url}" target="_blank" rel="noopener">Відкрити Reel ↗</a>
+      `;
+    })();
 
     // =========================
     // Signup
@@ -759,28 +884,13 @@ END:VCALENDAR`;
     });
 
     // =========================
-    // Instagram embed tiles
+    // Instagram tiles
     // =========================
-    function normalizeIG(url){
-      // convert to embed URL: https://www.instagram.com/p/XXXX/embed
-      try{
-        const u = new URL(url);
-        const parts = u.pathname.split("/").filter(Boolean);
-        // expects: /p/{code}/
-        const pIndex = parts.indexOf("p");
-        if(pIndex >= 0 && parts[pIndex+1]){
-          return { code: parts[pIndex+1], embed:`https://www.instagram.com/p/${parts[pIndex+1]}/embed` };
-        }
-      }catch(e){}
-      return { code:"", embed:"" };
-    }
-
     const grid = $("iggrid");
     grid.innerHTML = IG_POSTS.map((p,i)=>{
       const n = normalizeIG(p.url);
-      const title = p.title || "Instagram post";
+      const title = p.title || "Instagram";
       const label = n.code ? `#${n.code}` : `Post ${i+1}`;
-      // iframe embed (may be blocked sometimes; fallback is link)
       const iframe = n.embed
         ? `<iframe class="igembed" src="${n.embed}" loading="lazy" scrolling="no" allowtransparency="true"></iframe>`
         : `<div class="igfallback">Посилання: <a href="${p.url}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.85)">${p.url}</a></div>`;
@@ -793,7 +903,7 @@ END:VCALENDAR`;
           <div class="body">
             ${iframe}
             <div style="height:10px"></div>
-            <a class="btn mini" href="${p.url}" target="_blank" rel="noopener">Відкрити пост ↗</a>
+            <a class="btn mini" href="${p.url}" target="_blank" rel="noopener">Відкрити ↗</a>
           </div>
         </div>
       `;
@@ -819,7 +929,7 @@ END:VCALENDAR`;
     const now = new Date();
     const currentYear = now.getFullYear();
     const scoreByPlace = (p)=> p===1?10 : p===2?7 : p===3?5 : 2;
-    const stats = new Map(); // nick -> {nick, points, wins, prize, played, tours[]}
+    const stats = new Map();
     function addStat(nick, updater){
       if(!stats.has(nick)) stats.set(nick, {nick, points:0, wins:0, prize:0, played:0, tours:[]});
       updater(stats.get(nick));
@@ -933,6 +1043,7 @@ END:VCALENDAR`;
       const id = u.searchParams.get("v") || (u.pathname.split("/").pop());
       return `https://www.youtube.com/embed/${id}`;
     }
+
     $("mediaList").innerHTML = DATA.media.map(m=>{
       if(m.type==="youtube"){
         return `
@@ -940,6 +1051,25 @@ END:VCALENDAR`;
             <div style="font-size:14px"><b>${m.title}</b></div>
             <div style="height:10px"></div>
             <iframe class="yt" src="${ytEmbed(m.url)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        `;
+      }
+      if(m.type==="instagram"){
+        const n = normalizeIG(m.url);
+        const embed = n.embed
+          ? `<iframe class="igembed" src="${n.embed}" loading="lazy" scrolling="no" allowtransparency="true"></iframe>`
+          : `<div class="igfallback">Посилання: <a href="${m.url}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.85)">${m.url}</a></div>`;
+        return `
+          <div class="igcard" style="margin-top:10px">
+            <div class="top">
+              <b>${m.title}</b>
+              <span>${n.type ? n.type.toUpperCase() : "IG"}</span>
+            </div>
+            <div class="body">
+              ${embed}
+              <div style="height:10px"></div>
+              <a class="btn mini" href="${m.url}" target="_blank" rel="noopener">Відкрити ↗</a>
+            </div>
           </div>
         `;
       }
