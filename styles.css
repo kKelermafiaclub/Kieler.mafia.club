@@ -464,3 +464,39 @@ footer a{color:rgba(255,255,255,.78)}
     color: #ffffff;
     box-shadow: 0 0 15px rgba(211, 47, 47, 0.4);
 }
+/* Контейнер карти */
+.noir-map-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    border-radius: 4px; 
+    /* Додано трохи вигину для стилю */
+}
+
+/* Фігура Мафіозі (Оверлей) */
+.mafia-character-pin {
+    position: absolute;
+    bottom: 20px; /* Стоїть на "землі" внизу карти */
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 70px; /* Розмір персонажа */
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.9)); /* Тінь, щоб відділити від карти */
+    pointer-events: none; /* Щоб не заважав клікати по карті */
+    animation: bounce 3s infinite ease-in-out; /* Невелика анімація "дихання" */
+    z-index: 10;
+}
+
+/* Анімація, щоб персонаж виглядав живим */
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* Стилі кадру (iframe) - залишаємо як є, або можна затемнити трохи більше */
+.mafia-noir-card iframe {
+    /* ... твій попередній код ... */
+}
