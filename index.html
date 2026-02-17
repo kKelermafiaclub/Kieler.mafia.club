@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mafia Club · Hub</title>
+  <style>
+    :root{
+      --bg:#07080b; --bg2:#0b0f18;
+      --card:rgba(255,255,255,.06); --line:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92); --muted:rgba(255,255,255,.68);
+      --gold:#d8b25a; --red:#ff3b3b;
+      --r:18px; --shadow:0 18px 60px rgba(0,0,0,.55);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(216,178,90,.10), transparent 60%),
+        radial-gradient(1000px 700px at 90% 25%, rgba(255,59,59,.08), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x:hidden;
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 14px 70px}
+    .top{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(216,178,90,.22), rgba(255,255,255,.06));
+      border:1px solid rgba(216,178,90,.30); box-shadow:0 10px 30px rgba(0,0,0,.35);
+      font-weight:900;color:rgba(255,255,255,.92);font-family:var(--mono);
+    }
+    h1{margin:0;font-size:16px}
+    .sub{margin:2px 0 0;color:var(--muted);font-size:12.5px}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .tab{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--muted);
+      border-radius:999px;padding:8px 10px;font-size:12.5px;cursor:pointer}
+    .tab[aria-selected="true"]{color:var(--text);border-color:rgba(216,178,90,.35);background:rgba(216,178,90,.10)}
+    .grid{margin-top:14px;display:grid;grid-template-columns:1fr;gap:12px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .btn{appearance:none;border:none;cursor:pointer;text-decoration:none;color:var(--text);
+      padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg, rgba(216,178,90,.26), rgba(255,255,255,.08));border-color:rgba(216,178,90,.35)}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.10);text-align:left;font-size:13.5px}
+    th{color:rgba(255,255,255,.78);font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase}
+    .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.22);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .dot{width:7px;height:7px;border-radius:999px;background:var(--gold)}
+    .dot.red{background:var(--red)}
+    .panel{display:none}
+    .panel.active{display:block}
+    .mini{color:var(--muted);font-size:13px;line-height:1.55;margin:8px 0 0}
+    .two{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+    @media (max-width: 960px){.two{grid-template-columns:1fr}}
+    .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:16px;background:#000}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="logo">K</div>
+        <div>
+          <h1 id="clubName">Mafia Club</h1>
+          <div class="sub" id="clubMeta">События · турниры · рейтинг · фото/видео</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <a class="btn" id="igBtn" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn primary" id="regBtn" target="_blank" rel="noopener">Регистрация</a>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab" aria-selected="true" data-tab="ann">События</button>
+      <button class="tab" aria-selected="false" data-tab="rank">Рейтинг</button>
+      <button class="tab" aria-selected="false" data-tab="tours">Турниры</button>
+      <button class="tab" aria-selected="false" data-tab="players">Игроки</button>
+      <button class="tab" aria-selected="false" data-tab="media">Фото/Видео</button>
+      <button class="tab" aria-selected="false" data-tab="bday">Дни рождения</button>
+    </div>
+
+    <!-- События -->
+    <section class="card panel active" id="ann">
+      <div class="row">
+        <h2 style="margin:0;font-size:16px">Ближайшие события</h2>
+        <div class="pill"><span class="dot"></span> Обновляем вручную / из таблицы</div>
+      </div>
+      <div class="mini" id="annHint"></div>
+      <div id="events"></div>
+    </section>
+
+    <!-- Рейтинг -->
+    <section class="card panel" id="rank">
+      <div class="row">
+        <h2 style="margin:0;font-size:16px">Рейтинг сезона</h2>
+        <div class="pill"><span class="dot red"></span> Очки / призовые / победы</div>
+      </div>
+      <div class="mini">Считается автоматически по данным турниров (текущий год).</div>
+      <div style="height:10px"></div>
+      <table id="rankTable"></table>
+    </section>
+
+    <!-- Турниры -->
+    <section class="card panel" id="tours">
+      <div class="row">
+        <h2 style="margin:0;font-size:16px">Турниры</h2>
+        <div class="pill"><span class="dot"></span> Участники / призовые / ссылки</div>
+      </div>
+      <div style="height:10px"></div>
+      <div id="tournaments"></div>
+    </section>
+
+    <!-- Игроки -->
+    <section class="card panel" id="players">
+      <div class="row">
+        <h2 style="margin:0;font-size:16px">Игроки и статистика</h2>
+        <div class="pill"><span class="dot red"></span> по никам</div>
+      </div>
+      <div class="mini">Кликни на игрока — покажем, где участвовал(а) в этом году и призовые.</div>
+      <div style="height:10px"></div>
+      <div class="two">
+        <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10)">
+          <table id="playersTable"></table>
+        </div>
+        <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10)">
+          <h3 style="margin:0 0 8px;font-size:15px" id="pTitle">Выбери игрока</h3>
+          <div class="mini" id="pBody">Покажем турниры, места и призовые за текущий год.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Медиа -->
+    <section class="card panel" id="media">
+      <div class="row">
+        <h2 style="margin:0;font-size:16px">Фото / Видео</h2>
+        <div class="pill"><span class="dot"></span> YouTube / Instagram / альбомы</div>
+      </div>
+      <div class="mini">Сюда можно добавлять ссылки на альбомы и встраивать видео.</div>
+      <div style="height:12px"></div>
+      <div id="mediaList"></div>
+    </section>
+
+    <!-- ДР -->
+    <section class="card panel" id="bday">
+      <div class="row">
+        <h2 style="margin:0;font-size:16px">Дни рождения</h2>
+        <div class="pill"><span class="dot red"></span> ближайшие сверху</div>
+      </div>
+      <div style="height:10px"></div>
+      <table id="bdayTable"></table>
+    </section>
+
+    <div class="mini" style="text-align:center;margin-top:14px">
+      © <span id="y"></span> · Mafia Hub · made with 🖤
+    </div>
+  </div>
+
+<script>
+  // ========= ДАННЫЕ (пока вручную) =========
+  const DATA = {
+    clubName: "Мафия Киль · Mafia Kiel",
+    instagram: "https://instagram.com/kieler.mafia.club",
+    registrationUrl: "https://forms.gle/ВАШ_ГУГЛ_ФОРМ", // <- сюда форму на турнир/игру
+    location: "Brahmsweg 17, 24159 Kiel",
+
+    events: [
+      { title:"MAFIA FRIDAY · Total Black", date:"2026-03-13T18:30:00+01:00", note:"17:30 мастер-класс · 18:30 игры · первый вечер бесплатно", tag:"dresscode" },
+      { title:"Friday Mafia Night", date:"2026-03-20T18:30:00+01:00", note:"для новичков есть вводная часть", tag:"regular" },
+    ],
+
+    // Турниры: participants = [{nick, place, prize}]
+    tournaments: [
+      {
+        name:"Spring Tournament #1",
+        date:"2026-03-20",
+        link:"https://instagram.com/p/ВАШ_ПОСТ",
+        participants:[
+          {nick:"foxxy", place:1, prize:50},
+          {nick:"an.krsh", place:2, prize:30},
+          {nick:"yalemonchik", place:3, prize:20},
+        ]
+      },
+      {
+        name:"Secret Santa Party (mini)",
+        date:"2025-12-19",
+        link:"",
+        participants:[
+          {nick:"foxxy", place:2, prize:10},
+          {nick:"oksana", place:1, prize:15},
+        ]
+      }
+    ],
+
+    players: [
+      { nick:"foxxy", name:"", birthday:"2000-05-12" },   // YYYY-MM-DD
+      { nick:"an.krsh", name:"", birthday:"1998-10-02" },
+      { nick:"yalemonchik", name:"", birthday:"1997-02-14" },
+      { nick:"oksana", name:"", birthday:"1995-08-09" },
+    ],
+
+    media: [
+      { type:"album", title:"Фотоотчет · Friday 13", url:"https://drive.google.com/ВАШ_АЛЬБОМ" },
+      { type:"youtube", title:"Лучшие моменты", url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+    ]
+  };
+
+  // ========= Helpers =========
+  const $ = (id)=>document.getElementById(id);
+  const now = new Date();
+  const currentYear = now.getFullYear();
+
+  function fmtDateTime(iso){
+    const d = new Date(iso);
+    return d.toLocaleString(undefined,{weekday:"short", year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit"});
+  }
+  function fmtDate(ymd){
+    const d = new Date(ymd+"T12:00:00");
+    return d.toLocaleDateString(undefined,{year:"numeric", month:"short", day:"2-digit"});
+  }
+
+  // ========= Tabs =========
+  document.querySelectorAll(".tab").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected","false"));
+      btn.setAttribute("aria-selected","true");
+      const id = btn.dataset.tab;
+      document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active", p.id===id));
+    });
+  });
+
+  // ========= Header =========
+  $("clubName").textContent = DATA.clubName;
+  $("clubMeta").textContent = `Локация: ${DATA.location} · обновления: события/турниры/медиа`;
+  $("igBtn").href = DATA.instagram;
+  $("regBtn").href = DATA.registrationUrl;
+  $("y").textContent = new Date().getFullYear();
+  $("annHint").textContent = "Подсказка: можно делать отдельные теги (dresscode/regular), закреплять важные события и добавлять ссылки на пост.";
+
+  // ========= Events =========
+  const eventsSorted = [...DATA.events].sort((a,b)=> new Date(a.date)-new Date(b.date));
+  $("events").innerHTML = eventsSorted.map(e=>{
+    const tag = e.tag==="dresscode"
+      ? `<span class="pill"><span class="dot red"></span> Dress code</span>`
+      : `<span class="pill"><span class="dot"></span> Regular</span>`;
+    return `
+      <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10);margin-top:10px">
+        <div class="row">
+          <div>
+            <div style="font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:rgba(255,255,255,.70)">
+              ${fmtDateTime(e.date)}
+            </div>
+            <div style="margin-top:6px;font-size:15px"><b>${e.title}</b></div>
+            <div class="mini">${e.note||""}</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+            ${tag}
+            <a class="btn primary" target="_blank" rel="noopener" href="${DATA.registrationUrl}">Записаться</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // ========= Ranking (current year) =========
+  // Score model: 1st=10, 2nd=7, 3rd=5, other=2 (if participated). Prize sum.
+  const scoreByPlace = (p)=> p===1?10 : p===2?7 : p===3?5 : 2;
+
+  const stats = new Map(); // nick -> {nick, points, wins, prize, played, tours[]}
+  function addStat(nick, updater){
+    if(!stats.has(nick)) stats.set(nick, {nick, points:0, wins:0, prize:0, played:0, tours:[]});
+    updater(stats.get(nick));
+  }
+
+  DATA.tournaments.forEach(t=>{
+    const year = new Date(t.date+"T12:00:00").getFullYear();
+    if(year !== currentYear) return;
+    (t.participants||[]).forEach(p=>{
+      addStat(p.nick, s=>{
+        s.played += 1;
+        s.points += scoreByPlace(p.place);
+        s.prize += Number(p.prize||0);
+        if(p.place===1) s.wins += 1;
+        s.tours.push({tournament:t.name, date:t.date, place:p.place, prize:p.prize||0});
+      });
+    });
+  });
+
+  const rankArr = Array.from(stats.values())
+    .sort((a,b)=> (b.points-a.points) || (b.prize-a.prize) || (b.wins-a.wins));
+
+  $("rankTable").innerHTML = `
+    <thead><tr>
+      <th>#</th><th>Ник</th><th>Очки</th><th>Победы</th><th>Турниров</th><th>Призовые</th>
+    </tr></thead>
+    <tbody>
+      ${rankArr.length? rankArr.map((r,i)=>`
+        <tr>
+          <td>${i+1}</td>
+          <td><b>${r.nick}</b></td>
+          <td>${r.points}</td>
+          <td>${r.wins}</td>
+          <td>${r.played}</td>
+          <td>${r.prize}€</td>
+        </tr>
+      `).join("") : `<tr><td colspan="6" style="color:var(--muted)">Пока нет турниров в ${currentYear} (или не заполнены участники).</td></tr>`}
+    </tbody>
+  `;
+
+  // ========= Tournaments =========
+  const toursSorted = [...DATA.tournaments].sort((a,b)=> new Date(b.date)-new Date(a.date));
+  $("tournaments").innerHTML = toursSorted.map(t=>{
+    const parts = (t.participants||[]).sort((a,b)=> (a.place||999)-(b.place||999));
+    return `
+      <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10);margin-top:10px">
+        <div class="row">
+          <div>
+            <div style="font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:rgba(255,255,255,.70)">
+              ${fmtDate(t.date)}
+            </div>
+            <div style="margin-top:6px;font-size:15px"><b>${t.name}</b></div>
+            <div class="mini">${t.link ? `Ссылка: <a href="${t.link}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.78)">отчет</a>` : ""}</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+            <span class="pill"><span class="dot"></span> Участников: ${parts.length}</span>
+          </div>
+        </div>
+        <div style="height:10px"></div>
+        <table>
+          <thead><tr><th>Место</th><th>Ник</th><th>Приз</th></tr></thead>
+          <tbody>
+            ${parts.length? parts.map(p=>`
+              <tr><td>${p.place||""}</td><td><b>${p.nick}</b></td><td>${p.prize? p.prize+"€": "—"}</td></tr>
+            `).join("") : `<tr><td colspan="3" style="color:var(--muted)">Нет данных по участникам.</td></tr>`}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }).join("");
+
+  // ========= Players table + profile =========
+  const players = [...DATA.players].sort((a,b)=> a.nick.localeCompare(b.nick));
+  $("playersTable").innerHTML = `
+    <thead><tr><th>Ник</th><th>Турниры ${currentYear}</th><th>Призовые</th></tr></thead>
+    <tbody>
+      ${players.map(p=>{
+        const st = stats.get(p.nick);
+        const played = st?.played || 0;
+        const prize  = st?.prize || 0;
+        return `<tr data-nick="${p.nick}" style="cursor:pointer">
+          <td><b>${p.nick}</b></td><td>${played}</td><td>${prize}€</td>
+        </tr>`;
+      }).join("")}
+    </tbody>
+  `;
+
+  $("playersTable").addEventListener("click",(e)=>{
+    const tr = e.target.closest("tr[data-nick]");
+    if(!tr) return;
+    const nick = tr.dataset.nick;
+    const p = DATA.players.find(x=>x.nick===nick);
+    const st = stats.get(nick);
+
+    $("pTitle").textContent = `@${nick}`;
+    if(!st){
+      $("pBody").innerHTML = `<div class="mini">В ${currentYear} пока нет турниров/участий для этого игрока.</div>`;
+      return;
+    }
+    const list = st.tours
+      .sort((a,b)=> new Date(b.date)-new Date(a.date))
+      .map(x=>`<li>${fmtDate(x.date)} · <b>${x.tournament}</b> — место: ${x.place || "—"}, приз: ${x.prize || 0}€</li>`)
+      .join("");
+
+    $("pBody").innerHTML = `
+      <div class="mini">
+        Очки: <b>${st.points}</b> · Победы: <b>${st.wins}</b> · Турниров: <b>${st.played}</b> · Призовые: <b>${st.prize}€</b>
+      </div>
+      <div style="height:10px"></div>
+      <ul class="mini" style="margin:0;padding-left:18px;line-height:1.7">${list}</ul>
+    `;
+  });
+
+  // ========= Birthdays =========
+  function nextBirthday(bday){
+    // bday: YYYY-MM-DD
+    const d0 = new Date(bday+"T12:00:00");
+    const d = new Date(now.getFullYear(), d0.getMonth(), d0.getDate(), 12,0,0);
+    if(d < now) d.setFullYear(now.getFullYear()+1);
+    return d;
+  }
+  const bdays = DATA.players
+    .filter(p=>p.birthday)
+    .map(p=>({nick:p.nick, birthday:p.birthday, next: nextBirthday(p.birthday)}))
+    .sort((a,b)=> a.next - b.next);
+
+  $("bdayTable").innerHTML = `
+    <thead><tr><th>Ник</th><th>ДР</th><th>Когда ближайший</th></tr></thead>
+    <tbody>
+      ${bdays.length? bdays.map(x=>`
+        <tr>
+          <td><b>${x.nick}</b></td>
+          <td>${fmtDate(x.birthday)}</td>
+          <td>${x.next.toLocaleDateString(undefined,{month:"short", day:"2-digit"})}</td>
+        </tr>
+      `).join("") : `<tr><td colspan="3" style="color:var(--muted)">Дни рождения не заполнены.</td></tr>`}
+    </tbody>
+  `;
+
+  // ========= Media =========
+  function ytEmbed(url){
+    const u = new URL(url);
+    const id = u.searchParams.get("v") || (u.pathname.split("/").pop());
+    return `https://www.youtube.com/embed/${id}`;
+  }
+  $("mediaList").innerHTML = DATA.media.map(m=>{
+    if(m.type==="youtube"){
+      return `
+        <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10);margin-top:10px">
+          <div style="font-size:14px"><b>${m.title}</b></div>
+          <div style="height:10px"></div>
+          <iframe class="yt" src="${ytEmbed(m.url)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      `;
+    }
+    return `
+      <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10);margin-top:10px">
+        <div style="font-size:14px"><b>${m.title}</b></div>
+        <div class="mini"><a href="${m.url}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.78)">${m.url}</a></div>
+      </div>
+    `;
+  }).join("");
+</script>
+</body>
+</html>
