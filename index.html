@@ -1,16 +1,18 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Мафия Киль · Mafia Kiel</title>
-  <meta name="description" content="Mafia Kiel — анонсы, турниры, рейтинг, фотоотчеты и регистрация." />
+  <title>Мафія Киль · Mafia Kiel</title>
+  <meta name="description" content="Класична мафія щоп’ятниці в Кілі. Анонси, реєстрація, правила, турніри, рейтинг, фото/відео." />
+  <meta name="theme-color" content="#07080b" />
+
   <style>
     :root{
-      --bg:#05060a;
-      --bg2:#070a12;
+      --bg:#06070a;
+      --bg2:#0b0f18;
       --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.08);
+      --card2:rgba(255,255,255,.09);
       --line:rgba(255,255,255,.12);
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.68);
@@ -19,41 +21,51 @@
       --red:#ff3b3b;
       --r:18px;
       --shadow:0 18px 60px rgba(0,0,0,.55);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0; color:var(--text); font-family:var(--sans);
       background:
-        radial-gradient(1200px 700px at 20% 0%, rgba(216,178,90,.14), transparent 62%),
-        radial-gradient(1000px 700px at 90% 25%, rgba(255,59,59,.10), transparent 56%),
-        radial-gradient(900px 600px at 40% 100%, rgba(216,178,90,.10), transparent 56%),
+        radial-gradient(1200px 700px at 18% 0%, rgba(216,178,90,.13), transparent 60%),
+        radial-gradient(1000px 700px at 92% 25%, rgba(255,59,59,.10), transparent 55%),
+        radial-gradient(900px 600px at 40% 105%, rgba(216,178,90,.10), transparent 55%),
         linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x:hidden;
     }
+
+    /* film grain */
     .grain{
-      pointer-events:none; position:fixed; inset:0; opacity:.14; mix-blend-mode:overlay;
+      pointer-events:none; position:fixed; inset:0; opacity:.13; mix-blend-mode:overlay;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
       background-size:220px 220px;
     }
+
     .wrap{max-width:1180px; margin:0 auto; padding:22px 14px 70px;}
-    .topbar{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:6px 0 14px;}
+
+    /* top */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:8px 0 14px; flex-wrap:wrap;
+    }
     .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;}
     .logo{
       width:46px; height:46px; border-radius:16px;
-      background:radial-gradient(circle at 30% 30%, rgba(242,214,138,.30), transparent 55%),
-                linear-gradient(135deg, rgba(216,178,90,.22), rgba(255,255,255,.06));
-      border:1px solid rgba(216,178,90,.30);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(242,214,138,.34), transparent 55%),
+        linear-gradient(135deg, rgba(216,178,90,.24), rgba(255,255,255,.06));
+      border:1px solid rgba(216,178,90,.32);
       box-shadow:0 10px 30px rgba(0,0,0,.35);
       display:grid; place-items:center;
-      font-weight:900; letter-spacing:.08em;
+      font-weight:900; letter-spacing:.10em;
       color:var(--gold2);
       font-family:var(--mono);
     }
     .brand h1{margin:0; font-size:15.5px; letter-spacing:.02em}
     .brand p{margin:2px 0 0; font-size:12.5px; color:var(--muted)}
+
     .pillrow{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
     .pill{
       font-size:12px; padding:8px 10px; border-radius:999px;
@@ -65,26 +77,59 @@
     .dot{width:7px;height:7px;border-radius:999px;background:var(--gold); box-shadow:0 0 14px rgba(216,178,90,.35)}
     .dot.red{background:var(--red); box-shadow:0 0 14px rgba(255,59,59,.35)}
 
-    /* HERO */
+    /* HERO like poster */
     .hero{
-      padding:22px;
-      border-radius:calc(var(--r) + 8px);
+      border-radius:calc(var(--r) + 10px);
       background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       border:1px solid rgba(255,255,255,.12);
       box-shadow:var(--shadow);
-      position:relative;
       overflow:hidden;
+      position:relative;
+      padding:22px;
+      isolation:isolate;
     }
     .hero:before{
       content:""; position:absolute; inset:-2px;
       background:
         radial-gradient(520px 260px at 18% 30%, rgba(216,178,90,.22), transparent 70%),
-        radial-gradient(680px 340px at 82% 45%, rgba(255,59,59,.16), transparent 70%);
+        radial-gradient(740px 360px at 82% 45%, rgba(255,59,59,.18), transparent 70%);
       filter:blur(7px);
       opacity:.95;
       pointer-events:none;
+      z-index:-1;
     }
-    .hero > *{position:relative}
+    /* red “laser” lines right side (instagram poster vibe) */
+    .laser{
+      position:absolute; top:-40px; right:-30px;
+      width:340px; height:520px;
+      background:
+        linear-gradient(90deg, rgba(255,59,59,0), rgba(255,59,59,.35), rgba(255,59,59,0)),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,59,59,.0) 0px,
+          rgba(255,59,59,.0) 10px,
+          rgba(255,59,59,.28) 12px,
+          rgba(255,59,59,.0) 22px
+        );
+      filter:blur(.2px);
+      opacity:.8;
+      transform:rotate(8deg);
+      mask-image:radial-gradient(circle at 30% 50%, rgba(0,0,0,1), rgba(0,0,0,0) 70%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .spark{
+      position:absolute; right:72px; top:128px;
+      width:120px; height:120px; border-radius:999px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.9), rgba(255,255,255,0) 55%),
+        radial-gradient(circle at 55% 55%, rgba(255,59,59,.45), rgba(255,59,59,0) 60%);
+      opacity:.85; filter:blur(.2px);
+      pointer-events:none;
+      z-index:1;
+    }
+    .hero > *{position:relative; z-index:2}
+
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
       font-family:var(--mono);
@@ -94,12 +139,22 @@
       color:rgba(255,255,255,.78);
     }
     .kicker .mark{width:34px; height:1px; background:rgba(216,178,90,.80); box-shadow:0 0 18px rgba(216,178,90,.35);}
-    .hero h2{margin:12px 0 10px; font-size:36px; line-height:1.05; letter-spacing:-.02em;}
+    .hero h2{
+      margin:12px 0 10px;
+      font-size:38px; line-height:1.02; letter-spacing:-.03em;
+      text-transform:uppercase;
+    }
     .hero h2 span{
       background:linear-gradient(90deg, var(--gold2), #fff);
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
-    .hero p{margin:0; color:rgba(255,255,255,.78); max-width:78ch; font-size:15px; line-height:1.6;}
+    .hero p{
+      margin:0;
+      color:rgba(255,255,255,.80);
+      max-width:78ch;
+      font-size:15px;
+      line-height:1.6;
+    }
     .ctas{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
     .btn{
       appearance:none; border:none; cursor:pointer;
@@ -111,18 +166,29 @@
       display:inline-flex; gap:10px; align-items:center;
       transition:transform .10s ease, background .10s ease, border-color .10s ease;
       font-size:14px;
+      user-select:none;
     }
-    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.20)}
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.22)}
     .btn.primary{
       background:linear-gradient(135deg, rgba(216,178,90,.30), rgba(255,255,255,.08));
       border-color:rgba(216,178,90,.38);
     }
-    .btn.primary:hover{background:linear-gradient(135deg, rgba(216,178,90,.36), rgba(255,255,255,.10))}
+    .btn.primary:hover{
+      background:linear-gradient(135deg, rgba(216,178,90,.36), rgba(255,255,255,.10));
+    }
+    .btn.red{
+      background:linear-gradient(135deg, rgba(255,59,59,.22), rgba(255,255,255,.06));
+      border-color:rgba(255,59,59,.35);
+    }
+    .btn.red:hover{
+      background:linear-gradient(135deg, rgba(255,59,59,.28), rgba(255,255,255,.08));
+    }
     .mini{padding:10px 12px;border-radius:12px;font-size:13px}
 
-    /* LAYOUT */
-    .grid{margin-top:14px; display:grid; grid-template-columns: 1.2fr .8fr; gap:12px;}
+    /* layout */
+    .grid{margin-top:14px; display:grid; grid-template-columns: 1.25fr .75fr; gap:12px;}
     @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+
     .card{
       border-radius:var(--r);
       background:rgba(255,255,255,.06);
@@ -133,7 +199,20 @@
     .card h3{margin:0 0 10px; font-size:16px;}
     .sub{color:var(--muted); font-size:13px; line-height:1.55; margin:0 0 12px;}
 
-    /* EVENTS */
+    /* info chips */
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .chip{
+      display:inline-flex; gap:8px; align-items:center;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.20);
+      padding:7px 10px; border-radius:999px;
+      font-size:12.5px; color:rgba(255,255,255,.78);
+    }
+    .chip b{color:rgba(255,255,255,.92)}
+    .chip .c{width:7px;height:7px;border-radius:999px;background:var(--gold)}
+    .chip .c.red{background:var(--red)}
+
+    /* events */
     .events{display:grid; gap:10px}
     .event{
       padding:14px;
@@ -157,6 +236,8 @@
     }
     .badge.red{border-color:rgba(255,59,59,.40); background:rgba(255,59,59,.10)}
     .event .actions{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
+
+    /* countdown */
     .countwrap{
       display:grid; gap:10px;
       padding:14px; border-radius:16px;
@@ -173,7 +254,27 @@
     .num{font-size:20px; font-family:var(--mono); color:var(--gold2)}
     .lbl{font-size:12px; color:var(--muted); margin-top:4px}
 
-    /* Tabs */
+    /* role randomizer */
+    .rolebox{
+      display:grid; gap:10px;
+      padding:14px; border-radius:16px;
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .role{
+      font-family:var(--mono);
+      font-size:18px;
+      letter-spacing:.04em;
+      color:var(--gold2);
+    }
+    .small{font-size:12.5px;color:var(--muted);line-height:1.5;margin:0}
+
+    /* sections */
+    .section{margin-top:12px}
+    .split{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width: 980px){ .split{grid-template-columns:1fr} }
+
+    /* tabs in hub */
     .tabs{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0}
     .tab{
       border:1px solid rgba(255,255,255,.12);
@@ -191,134 +292,196 @@
     }
     .panel{display:none}
     .panel.active{display:block}
+
     table{width:100%;border-collapse:collapse}
     th,td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.10);text-align:left;font-size:13.5px}
     th{color:rgba(255,255,255,.78);font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase}
-    .pill2{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.22);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
-    .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:16px;background:#000}
+    .pill2{
+      display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.22);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)
+    }
 
-    /* Gallery */
-    .gallery{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px}
-    @media (max-width: 900px){.gallery{grid-template-columns:repeat(2, 1fr)}}
-    @media (max-width: 520px){.gallery{grid-template-columns:1fr}}
-    .gitem{
+    /* Instagram posts grid */
+    .iggrid{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px}
+    @media (max-width: 900px){.iggrid{grid-template-columns:repeat(2, 1fr)}}
+    @media (max-width: 520px){.iggrid{grid-template-columns:1fr}}
+    .igcard{
       border-radius:16px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.12);
       background:rgba(0,0,0,.25);
+      min-height:210px;
       position:relative;
-      min-height:170px;
     }
-    .gitem img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05) contrast(1.05)}
-    .gcap{
-      position:absolute; left:10px; right:10px; bottom:10px;
-      padding:8px 10px; border-radius:14px;
-      background:rgba(0,0,0,.45);
+    .igcard .top{
+      padding:10px 12px;
+      display:flex; justify-content:space-between; gap:10px; align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.22);
+    }
+    .igcard .top b{font-size:12.5px; color:rgba(255,255,255,.86)}
+    .igcard .top span{font-size:12px; color:var(--muted)}
+    .igcard .body{padding:12px}
+    .igembed{
+      width:100%;
+      border:0;
+      border-radius:12px;
+      background:#000;
+      min-height:380px;
+    }
+    .igfallback{
+      padding:14px;
+      border-radius:12px;
+      background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.12);
-      font-size:12.5px; color:rgba(255,255,255,.86);
-      backdrop-filter: blur(8px);
+      color:rgba(255,255,255,.82);
+      font-size:13px;
+      line-height:1.55;
     }
+
+    /* YouTube */
+    .yt{aspect-ratio:16/9;width:100%;border:0;border-radius:16px;background:#000}
 
     footer{margin-top:16px;color:var(--muted);font-size:12.5px;line-height:1.6;text-align:center}
     footer a{color:rgba(255,255,255,.78)}
     .sep{opacity:.35; padding:0 8px}
   </style>
 </head>
+
 <body>
   <div class="grain"></div>
 
   <div class="wrap">
     <div class="topbar">
-      <a class="brand" href="#top" aria-label="Mafia Kiel">
+      <a class="brand" href="#top" aria-label="Мафія Киль">
         <div class="logo">K</div>
         <div>
-          <h1>Мафия Киль · <span style="color:var(--gold2)">Mafia Kiel</span></h1>
-          <p>Анонсы · турниры · рейтинг · фото/видео</p>
+          <h1>Мафія Киль · <span style="color:var(--gold2)">Mafia Kiel</span></h1>
+          <p>Класична мафія щоп’ятниці · Kiel</p>
         </div>
       </a>
       <div class="pillrow">
         <div class="pill"><span class="dot"></span> Brahmsweg 17 · 24159 Kiel</div>
-        <div class="pill"><span class="dot red"></span> Темы & Dress code</div>
+        <div class="pill"><span class="dot red"></span> Теми & Dress code</div>
       </div>
     </div>
 
     <section class="hero" id="top">
+      <div class="laser"></div>
+      <div class="spark"></div>
+
       <div class="kicker"><span class="mark"></span> Kieler Mafia Club</div>
-      <h2>Играй красиво. <span>Думай глубже.</span></h2>
+      <h2>MAFIA <span>FRIDAY</span> · KIEL</h2>
       <p>
-        Классическая мафия по пятницам 🇩🇪
-        Новичкам — вводный мастер-класс. Хочешь попасть на игру или турнир? Регистрируйся или пиши в DM.
+        Ніколи не грав(ла) в мафію? Навчимо ✌️
+        Спочатку короткий майстер-клас, далі — ігри, інтриги та найкраща компанія.
       </p>
 
+      <div class="chips">
+        <span class="chip"><span class="c"></span> <b>17:30</b> майстер-клас</span>
+        <span class="chip"><span class="c"></span> <b>18:30</b> ігри</span>
+        <span class="chip"><span class="c red"></span> інколи: <b>Total Black</b></span>
+      </div>
+
       <div class="ctas">
-        <a class="btn primary" id="btnSignup" href="#"><span>🕵️</span> Записаться</a>
-        <a class="btn" id="btnIG" href="#" target="_blank" rel="noopener"><span>📸</span> Instagram</a>
-        <a class="btn" href="#announcements"><span>📅</span> Анонсы</a>
-        <a class="btn" href="#hub"><span>🏆</span> Рейтинг / Турниры</a>
+        <a class="btn primary" id="btnSignup" href="#"><span>🕵️</span> Записатися</a>
+        <a class="btn" id="btnIG" href="https://instagram.com/kieler.mafia.club" target="_blank" rel="noopener"><span>📸</span> Instagram</a>
+        <a class="btn red" href="#announcements"><span>📅</span> Анонси</a>
+        <a class="btn" href="#club"><span>🖤</span> Про клуб</a>
+        <a class="btn" href="#hub"><span>🏆</span> Рейтинг</a>
       </div>
     </section>
 
-    <section class="grid">
+    <section class="grid section">
       <div class="card" id="announcements">
-        <h3>Анонсы ближайших игр</h3>
-        <p class="sub">Кнопка “Add to Calendar” добавляет событие в календарь. Запись — через форму или DM.</p>
+        <h3>Анонси найближчих ігор</h3>
+        <p class="sub">Кнопка “Add to Calendar” додає подію. Запис — через DM або email (кнопка “Записатися”).</p>
         <div class="events" id="events"></div>
       </div>
 
       <div class="card">
-        <h3>До следующей игры</h3>
+        <h3>До наступної гри</h3>
         <div class="countwrap">
           <div class="counttitle">
-            <span id="nextLabel">Следующая игра: —</span>
+            <span id="nextLabel">Наступна гра: —</span>
             <span id="nextMeta">—</span>
           </div>
-          <div class="count">
-            <div class="unit"><div class="num" id="d">--</div><div class="lbl">дней</div></div>
-            <div class="unit"><div class="num" id="h">--</div><div class="lbl">часов</div></div>
-            <div class="unit"><div class="num" id="m">--</div><div class="lbl">мин</div></div>
+          <div class="count" aria-live="polite">
+            <div class="unit"><div class="num" id="d">--</div><div class="lbl">днів</div></div>
+            <div class="unit"><div class="num" id="h">--</div><div class="lbl">год</div></div>
+            <div class="unit"><div class="num" id="m">--</div><div class="lbl">хв</div></div>
             <div class="unit"><div class="num" id="s">--</div><div class="lbl">сек</div></div>
           </div>
         </div>
 
         <div style="height:12px"></div>
 
-        <h3>Роль дня 🎭</h3>
-        <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10)">
-          <div style="font-family:var(--mono);font-size:18px;color:var(--gold2)" id="role">Нажми “Выпадковая роль”</div>
-          <p class="sub" style="margin-top:10px">Фановый генератор для атмосферы (не реальный расклад ролей 😉).</p>
-          <button class="btn mini" id="btnRole" type="button">🎲 Випадковая роль</button>
+        <h3>Хто ти сьогодні? 🎭</h3>
+        <div class="rolebox">
+          <div class="role" id="role">Натисни “Випадкова роль”</div>
+          <p class="small">Фановий генератор для атмосфери (не справжній розподіл ролей 😉).</p>
+          <button class="btn mini" id="btnRole" type="button">🎲 Випадкова роль</button>
         </div>
       </div>
     </section>
 
-    <section class="card" style="margin-top:12px">
-      <h3>Фотоотчеты</h3>
-      <p class="sub"> https://www.instagram.com/p/DUyP-TADaGV/?igsh=MWlhZXU2YXE4cXFiYg==
-https://www.instagram.com/p/DP7QW1BDD-4/?igsh=OWpucnZidnFpZWRh
-https://www.instagram.com/p/DUdPFrajfEd/?igsh=MTlxcjNmazh3dWRkNQ==
-https://www.instagram.com/p/DQWTfb7DUG6/?igsh=MTA3aHo0Z3ExbHFuYQ==.</p>
-      <div class="gallery" id="gallery"></div>
+    <section class="split section" id="club">
+      <div class="card">
+        <h3>Про клуб</h3>
+        <p class="sub">
+          Ми граємо в класичну мафію щоп’ятниці в Кілі. Новачкам — короткий майстер-клас.
+          Атмосфера “як на афіші”: теми, дрес-код, фото/відео та турнірні вечори.
+        </p>
+        <div class="chips">
+          <span class="chip"><span class="c"></span> Локація: <b>Brahmsweg 17</b></span>
+          <span class="chip"><span class="c"></span> Місто: <b>Kiel</b></span>
+          <span class="chip"><span class="c red"></span> DM: <b>@kieler.mafia.club</b></span>
+        </div>
+        <div style="height:10px"></div>
+        <p class="sub" style="margin:0">
+          <b>Як записатися:</b> натисни “Записатися” або пиши в DM.
+          У повідомленні вкажи: <i>дата/тема, ім’я, скільки людей</i>.
+        </p>
+      </div>
+
+      <div class="card" id="rules">
+        <h3>Правила / FAQ</h3>
+        <p class="sub">Коротко про формат. Ведучий пояснить деталі на місці.</p>
+        <ul class="sub" style="margin:0; padding-left:18px; line-height:1.7">
+          <li><b>17:30</b> — міні-навчання для новачків</li>
+          <li><b>18:30</b> — ігри (ведучий керує процесом)</li>
+          <li><b>Дрес-код</b> інколи тематичний (наприклад Total Black)</li>
+          <li><b>Ввічливість</b> і повага — must</li>
+        </ul>
+      </div>
     </section>
 
-    <section class="card" id="hub" style="margin-top:12px">
-      <div class="row" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
-        <h3 style="margin:0">Клубный Hub</h3>
+    <section class="card section" id="photos">
+      <h3>Фото / пости з Instagram</h3>
+      <p class="sub">
+        Тут підтягуються пости як “красиві плитки”. Якщо embed не показується — натисни “Відкрити пост”.
+      </p>
+      <div class="iggrid" id="iggrid"></div>
+    </section>
+
+    <section class="card section" id="hub">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+        <h3 style="margin:0">Клубний Hub</h3>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <a class="btn" id="btnReg" href="#" target="_blank" rel="noopener">📝 Регистрация</a>
-          <a class="btn" href="#media">🎬 Видео</a>
+          <a class="btn mini" href="#announcements">📅 Анонси</a>
+          <a class="btn mini" href="#media">🎬 Відео</a>
         </div>
       </div>
 
       <div class="tabs" role="tablist" aria-label="Hub tabs">
         <button class="tab" role="tab" aria-selected="true" data-tab="rank">Рейтинг</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="tours">Турниры</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="players">Игроки</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="bday">Дни рождения</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="tours">Турніри</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="players">Гравці</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="bday">Дні народження</button>
       </div>
 
       <div class="panel active" id="rank" role="tabpanel">
-        <p class="sub">Рейтинг считается автоматически по турнирам текущего года (можно поменять формулу).</p>
+        <p class="sub">Рейтинг рахується автоматично по турнірах поточного року.</p>
         <table id="rankTable"></table>
       </div>
 
@@ -327,27 +490,27 @@ https://www.instagram.com/p/DQWTfb7DUG6/?igsh=MTA3aHo0Z3ExbHFuYQ==.</p>
       </div>
 
       <div class="panel" id="players" role="tabpanel">
-        <p class="sub">Кликни на игрока — покажем участие в турнирах этого года и призовые.</p>
+        <p class="sub">Клікни на гравця — покажемо участь у турнірах цього року та призові.</p>
         <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:12px">
           <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10)">
             <table id="playersTable"></table>
           </div>
           <div class="card" style="box-shadow:none;border-color:rgba(255,255,255,.10)">
-            <h3 style="margin:0 0 8px;font-size:15px" id="pTitle">Выбери игрока</h3>
-            <div class="sub" id="pBody">Покажем турниры, места и призовые за текущий год.</div>
+            <h3 style="margin:0 0 8px;font-size:15px" id="pTitle">Обери гравця</h3>
+            <div class="sub" id="pBody">Покажемо турніри, місця та призові за поточний рік.</div>
           </div>
         </div>
       </div>
 
       <div class="panel" id="bday" role="tabpanel">
-        <p class="sub">Ближайшие дни рождения — сверху.</p>
+        <p class="sub">Найближчі дні народження — зверху.</p>
         <table id="bdayTable"></table>
       </div>
     </section>
 
-    <section class="card" id="media" style="margin-top:12px">
-      <h3>Видео / ссылки</h3>
-      <p class="sub">Можно вставлять YouTube или давать ссылки на Reels/посты.</p>
+    <section class="card section" id="media">
+      <h3>Відео / медіа</h3>
+      <p class="sub">YouTube можна вбудувати, а Reels/пости — як посилання.</p>
       <div id="mediaList"></div>
     </section>
 
@@ -357,7 +520,7 @@ https://www.instagram.com/p/DQWTfb7DUG6/?igsh=MTA3aHo0Z3ExbHFuYQ==.</p>
         <span class="sep">·</span>
         <a href="https://instagram.com/oksanashvetsukr" target="_blank" rel="noopener">@oksanashvetsukr</a>
         <span class="sep">·</span>
-        <a href="https://instagram.com/kieler.mafia.club" target="_blank" rel="noopener">@kieler.mafia.club</a>
+        Instagram клубу: <a href="https://instagram.com/kieler.mafia.club" target="_blank" rel="noopener">@kieler.mafia.club</a>
       </div>
       <div style="margin-top:6px">© <span id="year"></span> Mafia Kiel · made with 🖤</div>
     </footer>
@@ -365,35 +528,38 @@ https://www.instagram.com/p/DQWTfb7DUG6/?igsh=MTA3aHo0Z3ExbHFuYQ==.</p>
 
   <script>
     // =========================
-    // EDIT: LINKS / SETTINGS
+    // EDIT: контакти / запис
     // =========================
     const CLUB = {
       instagram: "https://instagram.com/kieler.mafia.club",
-      registration: "https://forms.gle/ВАШ_ГУГЛ_ФОРМ", // <- встав сюди Google Form
       email: "kieler.mafia.club@gmail.com",
-      location: "Brahmsweg 17, 24159 Kiel"
+      location: "Brahmsweg 17, 24159 Kiel",
+      hosts: [
+        "https://instagram.com/oksana_kolivanova",
+        "https://instagram.com/oksanashvetsukr"
+      ]
     };
 
     // =========================
-    // EDIT: EVENTS (анонсы)
+    // EDIT: АНОНСИ
     // =========================
     const EVENTS = [
       {
         title: "MAFIA FRIDAY 13 · TOTAL BLACK DRESS CODE",
         dateTime: "2026-03-13T18:30:00+01:00",
-        warmup: "17:30 мастер-класс",
-        game: "18:30 игры",
-        price: "Первый вечер — бесплатно",
+        warmup: "17:30 · майстер-клас",
+        game: "18:30 · ігри",
+        price: "Перший вечір — безкоштовно",
         place: CLUB.location,
         dress: "Total Black",
-        tags: ["dresscode"],
+        tags: ["dresscode","special"],
       },
       {
         title: "Friday Mafia Night",
         dateTime: "2026-03-20T18:30:00+01:00",
-        warmup: "17:30 для новичков",
-        game: "18:30 игры",
-        price: "Уточняй в DM",
+        warmup: "17:30 · для новачків",
+        game: "18:30 · ігри",
+        price: "Уточнюй у DM",
         place: CLUB.location,
         dress: "Free style",
         tags: ["regular"],
@@ -401,27 +567,24 @@ https://www.instagram.com/p/DQWTfb7DUG6/?igsh=MTA3aHo0Z3ExbHFuYQ==.</p>
     ];
 
     // =========================
-    // EDIT: GALLERY (фото)
-    // Вставляй прямі URL на картинки
+    // EDIT: Instagram posts (вставляй лінки на пости)
     // =========================
-    const GALLERY = [
-      { img:"https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=60", cap:"Friday night · aftergame" },
-      { img:"https://images.unsplash.com/photo-1520975741355-89e2e0cbf8d6?auto=format&fit=crop&w=1200&q=60", cap:"Тематический вечер · Total Black" },
-      { img:"https://images.unsplash.com/photo-1520975940024-7b87f84d888a?auto=format&fit=crop&w=1200&q=60", cap:"Мастер-класс для новичков" },
-      { img:"https://images.unsplash.com/photo-1520975891848-0f1d4c2f2e1b?auto=format&fit=crop&w=1200&q=60", cap:"Турнирный стол" },
-      { img:"https://images.unsplash.com/photo-1515162305281-9f9d4b2b2b15?auto=format&fit=crop&w=1200&q=60", cap:"Победители недели" },
-      { img:"https://images.unsplash.com/photo-1520975803013-3b5d2b5c1cbb?auto=format&fit=crop&w=1200&q=60", cap:"Клубная атмосфера" },
+    const IG_POSTS = [
+      { title:"Фото / репорт", url:"https://www.instagram.com/p/DUyP-TADaGV/" },
+      { title:"Анонс", url:"https://www.instagram.com/p/DP7QW1BDD-4/" },
+      { title:"Фото / репорт", url:"https://www.instagram.com/p/DUdPFrajfEd/" },
+      { title:"Анонс", url:"https://www.instagram.com/p/DQWTfb7DUG6/" },
     ];
 
     // =========================
-    // EDIT: DATA HUB (турниры/игроки/медиа)
+    // EDIT: HUB data
     // =========================
     const DATA = {
       tournaments: [
         {
           name:"Spring Tournament #1",
           date:"2026-03-20",
-          link:"", // ссылка на пост/репорт
+          link:"",
           participants:[
             {nick:"foxxy", place:1, prize:50},
             {nick:"an.krsh", place:2, prize:30},
@@ -435,8 +598,8 @@ https://www.instagram.com/p/DQWTfb7DUG6/?igsh=MTA3aHo0Z3ExbHFuYQ==.</p>
         { nick:"yalemonchik", birthday:"1997-02-14" },
       ],
       media: [
-        { type:"youtube", title:"Лучшие моменты", url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-        { type:"link", title:"Instagram Reels", url:"https://instagram.com/kieler.mafia.club" },
+        { type:"youtube", title:"Best moments (приклад)", url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+        { type:"link", title:"Instagram клубу", url:"https://instagram.com/kieler.mafia.club" },
       ]
     };
 
@@ -444,6 +607,7 @@ https://www.instagram.com/p/DQWTfb7DUG6/?igsh=MTA3aHo0Z3ExbHFuYQ==.</p>
     // Helpers
     // =========================
     const $ = (id)=>document.getElementById(id);
+
     function fmtDateTime(iso){
       const d = new Date(iso);
       return d.toLocaleString(undefined,{weekday:"short", year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit"});
@@ -452,6 +616,7 @@ https://www.instagram.com/p/DQWTfb7DUG6/?igsh=MTA3aHo0Z3ExbHFuYQ==.</p>
       const d = new Date(ymd+"T12:00:00");
       return d.toLocaleDateString(undefined,{year:"numeric", month:"short", day:"2-digit"});
     }
+
     function buildICS(ev){
       const start = new Date(ev.dateTime);
       const end = new Date(start.getTime() + 3*60*60*1000);
@@ -463,11 +628,11 @@ https://www.instagram.com/p/DQWTfb7DUG6/?igsh=MTA3aHo0Z3ExbHFuYQ==.</p>
       const uid = `mafia-kiel-${start.getTime()}@mafiakiel`;
       const title = ev.title.replace(/[,;]/g," ");
       const loc = (ev.place || "").replace(/[,;]/g," ");
-      const desc = [ev.warmup||"", ev.game||"", ev.price?`Цена: ${ev.price}`:"", ev.dress?`Dress code: ${ev.dress}`:"", "Запись: DM/Форма"].filter(Boolean).join("\\n");
+      const desc = [ev.warmup||"", ev.game||"", ev.price?`Ціна: ${ev.price}`:"", ev.dress?`Dress code: ${ev.dress}`:"", "Запис: DM/Email"].filter(Boolean).join("\\n");
       const ics =
 `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Mafia Kiel//Events//RU
+PRODID:-//Mafia Kiel//Events//UA
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
@@ -483,29 +648,40 @@ END:VCALENDAR`;
       return "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
     }
 
-    // Header links
-    $("btnIG").href = CLUB.instagram;
-    $("btnReg").href = CLUB.registration;
-
-    // Signup action
+    // =========================
+    // Signup
+    // =========================
     function signup(){
-      const subject = encodeURIComponent("Запись на мафию · Mafia Kiel");
-      const body = encodeURIComponent("Привет! Хочу записаться на мафию.\nДата/тема: ____\nИмя: ____\nСколько людей: ____\n\nЛокация: "+CLUB.location+"\nInstagram: "+CLUB.instagram);
+      const subject = encodeURIComponent("Запис на мафію · Mafia Kiel");
+      const body = encodeURIComponent(
+        "Привіт! Хочу записатися на мафію.\n" +
+        "Дата/тема: ____\nІм’я: ____\nСкільки людей: ____\n\n" +
+        "Локація: " + CLUB.location + "\nInstagram: " + CLUB.instagram
+      );
       const mailto = `mailto:${CLUB.email}?subject=${subject}&body=${body}`;
-      const msg = `Запись:\n1) Через форму: ${CLUB.registration}\n2) Через DM: ${CLUB.instagram}\n3) Через Email: ${CLUB.email}\n\nНажми OK — открою Email.`;
+      const msg =
+`Як записатися?
+1) DM клубу: ${CLUB.instagram}
+2) DM організаторам:
+- ${CLUB.hosts[0]}
+- ${CLUB.hosts[1]}
+3) Email: ${CLUB.email}
+
+Натисни OK — відкрию Email.`;
       if(confirm(msg)) window.location.href = mailto;
     }
     $("btnSignup").addEventListener("click",(e)=>{e.preventDefault(); signup();});
 
-    // Render events + next event for countdown
+    // =========================
+    // Render events + countdown
+    // =========================
     const $events = $("events");
+
     function renderEvents(){
       $events.innerHTML = "";
       const sorted = [...EVENTS].sort((a,b)=> new Date(a.dateTime)-new Date(b.dateTime));
       sorted.forEach(ev=>{
-        const badge = ev.tags?.includes("dresscode")
-          ? `<span class="badge red">DRESS CODE</span>`
-          : `<span class="badge">FRIDAY</span>`;
+        const badge = ev.tags?.includes("dresscode") ? `<span class="badge red">DRESS CODE</span>` : `<span class="badge">FRIDAY</span>`;
         const dress = ev.dress && ev.dress.toLowerCase().includes("black")
           ? `<span class="badge red">TOTAL BLACK</span>`
           : (ev.dress ? `<span class="badge">${ev.dress}</span>` : "");
@@ -520,14 +696,14 @@ END:VCALENDAR`;
               <strong>${ev.title}</strong>
               <div class="meta">
                 <div>🗓️ ${fmtDateTime(ev.dateTime)}</div>
-                <div>🕘 ${ev.warmup || ""} ${ev.game ? " · " + ev.game : ""}</div>
+                <div>🕘 ${ev.warmup || ""}${ev.game ? " · " + ev.game : ""}</div>
                 <div>📍 ${ev.place || "Kiel"}</div>
                 ${ev.price ? `<div>💶 ${ev.price}</div>` : ""}
               </div>
             </div>
           </div>
           <div class="actions">
-            <a class="btn mini primary" href="${CLUB.registration}" target="_blank" rel="noopener">📝 Регистрация</a>
+            <button class="btn mini primary" data-signup="1">🕵️ Записатися</button>
             <a class="btn mini" href="${icsHref}" download="mafia-kiel.ics">➕ Add to Calendar</a>
           </div>
         `;
@@ -540,7 +716,7 @@ END:VCALENDAR`;
       const now = new Date();
       const next = sorted.find(ev => new Date(ev.dateTime) > now) || sorted[0];
       window.__NEXT = next;
-      $("nextLabel").textContent = next ? `Следующая игра: ${next.title}` : "Следующая игра: —";
+      $("nextLabel").textContent = next ? `Наступна гра: ${next.title}` : "Наступна гра: —";
       $("nextMeta").textContent  = next ? fmtDateTime(next.dateTime) : "—";
     }
 
@@ -562,29 +738,70 @@ END:VCALENDAR`;
       $("s").textContent = String(s).padStart(2,"0");
     }
 
+    document.addEventListener("click",(e)=>{
+      const btn = e.target.closest("[data-signup]");
+      if(btn){ e.preventDefault(); signup(); }
+    });
+
+    // =========================
     // Role randomizer
+    // =========================
     const ROLES = [
-      {name:"Мирный житель", hint:"Наблюдай, анализируй, голосуй."},
-      {name:"Мафия", hint:"Держи линию и не пались 😄"},
-      {name:"Шериф", hint:"Ищи правду вопросами."},
-      {name:"Дон", hint:"Керуешь мафией — тихо."},
-      {name:"Доктор", hint:"Спасай город (если роль есть)."},
+      {name:"Мирний мешканець", hint:"Спостерігай, аналізуй, голосуй."},
+      {name:"Мафія", hint:"Тримай лінію, не пались 😄"},
+      {name:"Шериф", hint:"Став питання і шукай правду."},
+      {name:"Дон", hint:"Керуєш грою — але тихо."},
+      {name:"Доктор", hint:"Рятуй місто (якщо роль у форматі)."},
     ];
     $("btnRole").addEventListener("click", ()=>{
       const r = ROLES[Math.floor(Math.random()*ROLES.length)];
       $("role").textContent = `${r.name} — ${r.hint}`;
     });
 
-    // Gallery
-    const $g = $("gallery");
-    $g.innerHTML = GALLERY.map(x=>`
-      <div class="gitem">
-        <img src="${x.img}" alt="">
-        <div class="gcap">${x.cap || ""}</div>
-      </div>
-    `).join("");
+    // =========================
+    // Instagram embed tiles
+    // =========================
+    function normalizeIG(url){
+      // convert to embed URL: https://www.instagram.com/p/XXXX/embed
+      try{
+        const u = new URL(url);
+        const parts = u.pathname.split("/").filter(Boolean);
+        // expects: /p/{code}/
+        const pIndex = parts.indexOf("p");
+        if(pIndex >= 0 && parts[pIndex+1]){
+          return { code: parts[pIndex+1], embed:`https://www.instagram.com/p/${parts[pIndex+1]}/embed` };
+        }
+      }catch(e){}
+      return { code:"", embed:"" };
+    }
 
+    const grid = $("iggrid");
+    grid.innerHTML = IG_POSTS.map((p,i)=>{
+      const n = normalizeIG(p.url);
+      const title = p.title || "Instagram post";
+      const label = n.code ? `#${n.code}` : `Post ${i+1}`;
+      // iframe embed (may be blocked sometimes; fallback is link)
+      const iframe = n.embed
+        ? `<iframe class="igembed" src="${n.embed}" loading="lazy" scrolling="no" allowtransparency="true"></iframe>`
+        : `<div class="igfallback">Посилання: <a href="${p.url}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.85)">${p.url}</a></div>`;
+      return `
+        <div class="igcard">
+          <div class="top">
+            <b>${title}</b>
+            <span>${label}</span>
+          </div>
+          <div class="body">
+            ${iframe}
+            <div style="height:10px"></div>
+            <a class="btn mini" href="${p.url}" target="_blank" rel="noopener">Відкрити пост ↗</a>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    // =========================
     // Hub tabs
+    // =========================
     const tabs = Array.from(document.querySelectorAll(".tab"));
     const panels = Array.from(document.querySelectorAll(".panel"));
     tabs.forEach(t=>{
@@ -596,7 +813,9 @@ END:VCALENDAR`;
       });
     });
 
+    // =========================
     // Ranking from tournaments current year
+    // =========================
     const now = new Date();
     const currentYear = now.getFullYear();
     const scoreByPlace = (p)=> p===1?10 : p===2?7 : p===3?5 : 2;
@@ -620,11 +839,11 @@ END:VCALENDAR`;
     });
     const rankArr = Array.from(stats.values()).sort((a,b)=> (b.points-a.points) || (b.prize-a.prize) || (b.wins-a.wins));
     $("rankTable").innerHTML = `
-      <thead><tr><th>#</th><th>Ник</th><th>Очки</th><th>Победы</th><th>Турниров</th><th>Призовые</th></tr></thead>
+      <thead><tr><th>#</th><th>Нік</th><th>Очки</th><th>Перемоги</th><th>Турнірів</th><th>Призові</th></tr></thead>
       <tbody>
         ${rankArr.length? rankArr.map((r,i)=>`
           <tr><td>${i+1}</td><td><b>${r.nick}</b></td><td>${r.points}</td><td>${r.wins}</td><td>${r.played}</td><td>${r.prize}€</td></tr>
-        `).join("") : `<tr><td colspan="6" style="color:var(--muted)">Нет турниров в ${currentYear} (или не заполнены участники).</td></tr>`}
+        `).join("") : `<tr><td colspan="6" style="color:var(--muted)">Немає турнірів у ${currentYear} або дані не заповнені.</td></tr>`}
       </tbody>
     `;
 
@@ -638,16 +857,16 @@ END:VCALENDAR`;
             <div>
               <div style="font-family:var(--mono);font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:rgba(255,255,255,.70)">${fmtDate(t.date)}</div>
               <div style="margin-top:6px;font-size:15px"><b>${t.name}</b></div>
-              <div class="sub">${t.link ? `Отчет: <a href="${t.link}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.78)">ссылка</a>` : ""}</div>
+              <div class="sub">${t.link ? `Звіт: <a href="${t.link}" target="_blank" rel="noopener" style="color:rgba(255,255,255,.78)">посилання</a>` : ""}</div>
             </div>
-            <span class="pill2"><span class="dot"></span> Участников: ${parts.length}</span>
+            <span class="pill2"><span class="dot"></span> Учасників: ${parts.length}</span>
           </div>
           <table>
-            <thead><tr><th>Место</th><th>Ник</th><th>Приз</th></tr></thead>
+            <thead><tr><th>Місце</th><th>Нік</th><th>Приз</th></tr></thead>
             <tbody>
               ${parts.length? parts.map(p=>`
                 <tr><td>${p.place||""}</td><td><b>${p.nick}</b></td><td>${p.prize? p.prize+"€":"—"}</td></tr>
-              `).join("") : `<tr><td colspan="3" style="color:var(--muted)">Нет данных по участникам.</td></tr>`}
+              `).join("") : `<tr><td colspan="3" style="color:var(--muted)">Немає даних по учасниках.</td></tr>`}
             </tbody>
           </table>
         </div>
@@ -657,7 +876,7 @@ END:VCALENDAR`;
     // Players + profile
     const players = [...DATA.players].sort((a,b)=> a.nick.localeCompare(b.nick));
     $("playersTable").innerHTML = `
-      <thead><tr><th>Ник</th><th>Турниры ${currentYear}</th><th>Призовые</th></tr></thead>
+      <thead><tr><th>Нік</th><th>Турніри ${currentYear}</th><th>Призові</th></tr></thead>
       <tbody>
         ${players.map(p=>{
           const st = stats.get(p.nick);
@@ -676,13 +895,13 @@ END:VCALENDAR`;
       const st = stats.get(nick);
       $("pTitle").textContent = `@${nick}`;
       if(!st){
-        $("pBody").innerHTML = `<div class="sub">В ${currentYear} пока нет турниров/участий для этого игрока.</div>`;
+        $("pBody").innerHTML = `<div class="sub">У ${currentYear} поки немає турнірів/участі для цього гравця.</div>`;
         return;
       }
       const list = st.tours.sort((a,b)=> new Date(b.date)-new Date(a.date))
-        .map(x=>`<li>${fmtDate(x.date)} · <b>${x.tournament}</b> — место: ${x.place||"—"}, приз: ${x.prize||0}€</li>`).join("");
+        .map(x=>`<li>${fmtDate(x.date)} · <b>${x.tournament}</b> — місце: ${x.place||"—"}, приз: ${x.prize||0}€</li>`).join("");
       $("pBody").innerHTML = `
-        <div class="sub">Очки: <b>${st.points}</b> · Победы: <b>${st.wins}</b> · Турниров: <b>${st.played}</b> · Призовые: <b>${st.prize}€</b></div>
+        <div class="sub">Очки: <b>${st.points}</b> · Перемоги: <b>${st.wins}</b> · Турнірів: <b>${st.played}</b> · Призові: <b>${st.prize}€</b></div>
         <div style="height:10px"></div>
         <ul class="sub" style="margin:0;padding-left:18px;line-height:1.7">${list}</ul>
       `;
@@ -700,11 +919,11 @@ END:VCALENDAR`;
       .map(p=>({nick:p.nick, birthday:p.birthday, next: nextBirthday(p.birthday)}))
       .sort((a,b)=> a.next - b.next);
     $("bdayTable").innerHTML = `
-      <thead><tr><th>Ник</th><th>ДР</th><th>Ближайший</th></tr></thead>
+      <thead><tr><th>Нік</th><th>ДН</th><th>Найближчий</th></tr></thead>
       <tbody>
         ${bdays.length? bdays.map(x=>`
           <tr><td><b>${x.nick}</b></td><td>${fmtDate(x.birthday)}</td><td>${x.next.toLocaleDateString(undefined,{month:"short", day:"2-digit"})}</td></tr>
-        `).join("") : `<tr><td colspan="3" style="color:var(--muted)">Дни рождения не заполнены.</td></tr>`}
+        `).join("") : `<tr><td colspan="3" style="color:var(--muted)">Дні народження не заповнені.</td></tr>`}
       </tbody>
     `;
 
@@ -733,7 +952,7 @@ END:VCALENDAR`;
     }).join("");
 
     // Init
-    document.getElementById("year").textContent = new Date().getFullYear();
+    $("year").textContent = new Date().getFullYear();
     renderEvents();
     tick();
     setInterval(tick, 1000);
