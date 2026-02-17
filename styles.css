@@ -500,3 +500,311 @@ footer a{color:rgba(255,255,255,.78)}
 .mafia-noir-card iframe {
     /* ... твій попередній код ... */
 }
+/* Контейнер таблиці */
+#rankTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #1a1a1a; /* Темний фон всередині */
+    border: 1px solid #333;
+    font-family: 'Courier New', Courier, monospace; /* Для геймерського стилю */
+}
+
+/* Заголовки */
+.mafia-rating-table th {
+    background-color: #2c2c2c;
+    color: #d32f2f; /* Червоний акцент для заголовків */
+    text-align: left;
+    padding: 12px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #d32f2f;
+}
+
+/* Комірки даних */
+.mafia-rating-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #333;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+}
+
+/* Ефект при наведенні на рядок */
+.mafia-rating-table tr:hover {
+    background-color: #252525;
+    transition: background-color 0.2s;
+}
+
+/* Додатковий стиль для виділення переможця (перший стовпчик) */
+.mafia-rating-table td:first-child {
+    font-weight: bold;
+    color: #fff;
+}
+<!-- Ця частина залишається майже без змін, JavaScript сам заповнить дані -->
+<div class="panel active" id="rank" role="tabpanel">
+    <p class="sub">
+        Рейтинг рахується автоматично по турнірах поточного року.
+    </p>
+    <!-- Тут з'явиться таблиця з Google Sheets -->
+    <div id="rankTable">
+        <div style="padding:20px; text-align:center; color:#666;">Завантаження даних...</div>
+    </div>
+</div>
+/* --- STYLES FOR POWER RANKINGS --- */
+.mafia-rating-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.rating-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.rating-card:hover {
+    transform: translateX(5px);
+    border-color: #444;
+    background-color: #222;
+}
+
+/* Стиль для Боса (#1) */
+.rating-card.top-don {
+    border: 1px solid #d32f2f;
+    background: linear-gradient(90deg, rgba(30, 0, 0, 1) 0%, rgba(20, 20, 20, 1) 100%);
+}
+
+.rating-card.top-don::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #d32f2f;
+}
+
+.card-rank {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+    min-width: 30px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.card-info {
+    flex-grow: 1;
+}
+
+.card-name {
+    font-weight: bold;
+    color: #fff;
+    font-size: 1rem;
+    display: block;
+}
+
+.card-stats {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.card-score {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 120px;
+}
+
+.score-value {
+    font-size: 1.1rem;
+    color: #d32f2f;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.score-bar-bg {
+    width: 100%;
+    height: 6px;
+    background-color: #333;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.score-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #d32f2f, #ff6e40);
+    width: 0%; 
+    border-radius: 3px;
+    transition: width 1s ease-out;
+}
+/* --- STYLES FOR POWER RANKINGS (Картки гравців) --- */
+.mafia-rating-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.rating-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.rating-card:hover {
+    transform: translateX(5px);
+    border-color: #444;
+    background-color: #222;
+}
+
+/* Стиль для Боса (#1) */
+.rating-card.top-don {
+    border: 1px solid #d32f2f;
+    background: linear-gradient(90deg, rgba(30, 0, 0, 1) 0%, rgba(20, 20, 20, 1) 100%);
+}
+
+.rating-card.top-don::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #d32f2f;
+}
+
+.card-rank {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+    min-width: 30px;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.card-info {
+    flex-grow: 1;
+}
+
+.card-name {
+    font-weight: bold;
+    color: #fff;
+    font-size: 1rem;
+    display: block;
+}
+
+.card-stats {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.card-score {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 120px;
+}
+
+.score-value {
+    font-size: 1.1rem;
+    color: #d32f2f;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.score-bar-bg {
+    width: 100%;
+    height: 6px;
+    background-color: #333;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.score-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #d32f2f, #ff6e40);
+    width: 0%; 
+    border-radius: 3px;
+    transition: width 1s ease-out;
+}
+
+/* --- STYLES FOR TIMELINE (Хроніка подій) --- */
+.mafia-timeline {
+    position: relative;
+    padding-left: 30px;
+    margin-top: 20px;
+    border-left: 2px solid #333;
+}
+
+.event-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 25px;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.event-card:hover {
+    transform: translateX(5px);
+    border-color: #555;
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    left: -37px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    background-color: #d32f2f;
+    border-radius: 50%;
+    border: 2px solid #1a1a1a;
+    box-shadow: 0 0 10px rgba(211, 47, 47, 0.5);
+}
+
+.event-date {
+    font-family: 'Courier New', Courier, monospace;
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.event-title {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.event-details {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8rem;
+    color: #888;
+}

@@ -1085,3 +1085,181 @@ END:VCALENDAR`;
     </a>
   </div>
 </div>
+<section class="card section" id="hub">
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    "
+  >
+    <h3 style="margin: 0">Клубний Hub</h3>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap">
+      <button class="btn mini" onclick="switchTab('rank')">Рейтинг</button>
+      <button class="btn mini" onclick="switchTab('tours')">Події</button>
+    </div>
+  </div>
+
+  <!-- Вкладка Рейтинг -->
+  <div id="rank-panel" style="margin-top: 20px">
+    <p class="sub">Найвпливовіші гравці Клубу (Згенеровано з даних).</p>
+    <div id="rankTable"></div>
+  </div>
+
+  <!-- Вкладка Подій -->
+  <div id="tours-panel" style="display: none; margin-top: 20px">
+    <p class="sub">Хроніка ігор 2026 року.</p>
+    <div id="tournaments"></div>
+  </div>
+</section>
+<script>
+  // --- 1. ДАНІ РЕЙТИНГУ (З файлу рейтинг.html, обрано топ гравців) ---
+  // Враховуємо: Ігри, Перемоги, MVP, Ролі
+  const RANKING_DATA = [
+    // Топ гравці (приблизна очікувана статистика на основі даних)
+    { rank: 1, name: "Mechanik", games: 13, wins: 3, mvp: 1, score: 300 },
+    { rank: 2, name: "Frau Kraft", games: 9, wins: 5, mvp: 1, score: 280 },
+    { rank: 3, name: "Medical Femme", games: 11, wins: 5, mvp: 2, score: 270 },
+    { rank: 4, name: "Sonnik", games: 4, wins: 2, mvp: 1, score: 120 },
+    { rank: 5, name: "Aladin", games: 5, wins: 1, mvp: 0, score: 80 },
+    { rank: 6, name: "Jane Doe", games: 6, wins: 1, mvp: 0, score: 75 },
+    // ... можна додати інших гравців таким же форматом
+  ];
+
+  // --- 2. ДАНІ ПОДІЙ (З файлу Общ.html) ---
+  const EVENTS_DATA = [
+    {
+      date: "02.01.2026",
+      host: "Бамбук",
+      type: "Майстер-клас",
+      total: 10,
+      new: 2,
+    },
+    {
+      date: "09.01.2026",
+      host: "Бамбук",
+      type: "Майстер-клас",
+      total: 10,
+      new: 2,
+    },
+    {
+      date: "14.02.2026",
+      host: "Механік & Лімон",
+      type: "День закоханих",
+      total: 16,
+      new: 4,
+      special: true,
+    },
+    {
+      date: "13.03.2026",
+      host: "Крючкова",
+      type: "8 Березня",
+      total: 12,
+      new: 3,
+      special: true,
+    },
+    {
+      date: "20.12.2026",
+      host: "Механік",
+      type: "Таємний Санта",
+      total: 15,
+      new: 2,
+      special: true,
+    },
+  ];
+
+  // --- ЛОГІКА РЕНДЕРИНГУ РЕЙТИНГУ ---
+  function renderRanking() {
+    const container = document.getElementById("rankTable");
+    let maxScore = Math.max(...RANKING_DATA.map((p) => p.score));
+
+    let html = '<div class="mafia-rating-list">';
+
+    RANKING_DATA.forEach((player) => {
+      const isTopDon = player.rank === 1;
+      const percent = (player.score / maxScore) * 100;
+
+      html += `
+                <div class="${isTopDon ? "rating-card top-don" : "rating-card"}">
+                    <div class="card-rank">
+                        ${isTopDon ? "🥇" : "#" + player.rank}
+                    </div>
+                    <div class="card-info">
+                        <span class="card-name">${player.name}</span>
+                        <span class="card-stats">
+                            🎮 ${player.games} ігор | 🏆 W: ${player.wins} | MVP: ${player.mvp}
+                            ${isTopDon ? '<span style="color:#d32f2f; font-weight:bold; margin-left:10px;">BOSS</span>' : ""}
+                        </span>
+                    </div>
+                    <div class="card-score">
+                        <span class="score-value">${player.score} PTS</span>
+                        <div class="score-bar-bg">
+                            <div class="score-bar-fill" style="width: ${Math.max(percent, 5)}%;"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+    });
+    html += "</div>";
+    container.innerHTML = html;
+
+    // Анімація
+    setTimeout(() => {
+      const bars = document.querySelectorAll(".score-bar-fill");
+      bars.forEach((bar) => {
+        const w = bar.style.width;
+        bar.style.width = "0%";
+        setTimeout(() => (bar.style.width = w), 50);
+      });
+    }, 100);
+  }
+
+  // --- ЛОГІКА РЕНДЕРИНГУ ПОДІЙ ---
+  function renderEvents() {
+    const container = document.getElementById("tournaments");
+    let html = '<div class="mafia-timeline">';
+
+    EVENTS_DATA.forEach((evt) => {
+      const isSpecial = evt.special === true;
+      const style = isSpecial
+        ? "border-color: #d32f2f; background: #220000;"
+        : "";
+
+      html += `
+                <div class="event-card" style="${style}">
+                    <span class="event-date">${evt.date}</span>
+                    <div class="event-title">${evt.type}</div>
+                    <div class="event-details">
+                        <span class="host-tag">🕵️ ${evt.host}</span>
+                        <span class="player-count-tag">👥 ${evt.total} чел (+${evt.new} нових)</span>
+                    </div>
+                </div>
+            `;
+    });
+    html += "</div>";
+    container.innerHTML = html;
+  }
+
+  // --- ПЕРЕКЛАДАЧ ВКЛАДОК (Tab Switcher) ---
+  window.switchTab = function (tabName) {
+    const rankPanel = document.getElementById("rank-panel");
+    const toursPanel = document.getElementById("tours-panel");
+
+    if (tabName === "rank") {
+      rankPanel.style.display = "block";
+      toursPanel.style.display = "none";
+      renderRanking(); // Оновлення при відкритті
+    } else {
+      rankPanel.style.display = "none";
+      toursPanel.style.display = "block";
+      renderEvents();
+    }
+  };
+
+  // Запуск при завантаженні
+  window.addEventListener("DOMContentLoaded", () => {
+    renderRanking(); // За замовчуванням
+  });
+</script>
